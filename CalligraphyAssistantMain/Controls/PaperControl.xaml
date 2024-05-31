@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.PaperControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+             xmlns:code="clr-namespace:CalligraphyAssistantMain.Code"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="黑体"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <code:IsNullConverter x:Key="isNullConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#FFCF4A">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0 20">
+            <Image Width="1778" Height="32" Margin="0,30,0,0" VerticalAlignment="Top" Source="/CalligraphyAssistantMain;component/Images/TitleBar.png"></Image>
+            <TextBlock x:Name="classLb" TextAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" Text="课上练习题" FontSize="32" FontWeight="Bold"></TextBlock>
+        </Grid>
+        <Border Grid.Row="1" Background="#FFFFFF" CornerRadius="4" Width="1422" Height="790" BorderThickness="3" BorderBrush="#191410">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.3" ShadowDepth="8"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="120"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="view"   Margin="50 20 50 0"  Visibility="Collapsed">
+                    <ItemsControl   VirtualizingStackPanel.IsVirtualizing="True"   VirtualizingPanel.VirtualizationMode="Recycling" ItemsSource="{Binding PaperCollectionPaging}">
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                <ItemsPresenter />
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border  Height="120" BorderThickness="0 0 0 1" BorderBrush="#999999">
+                                    <Grid  Margin="0 20 0 10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="240"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Left" TextWrapping="Wrap"  Foreground="#000000"   TextTrimming="CharacterEllipsis" FontSize="32">
+                                            <Run Text="["/><Run Text="{Binding user}"/><Run Text="]"/> <Run Text="{Binding title}"/>
+                                        </TextBlock>
+                                        <TextBlock x:Name="statisticsTxt" VerticalAlignment="Center" Grid.Row="1"  HorizontalAlignment="Left" TextWrapping="Wrap"  Foreground="#333333"   TextTrimming="CharacterEllipsis" FontSize="24">
+                                        <Run Text="答题统计："/><Run Text="{Binding CompleteCount}" Foreground="#34C58B"/><Run Text="人/"/><Run Text="{Binding UserCount}"/><Run Text="人"/> 
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="1" Text="{Binding time,StringFormat=yyyy.MM.dd  hh:mm:ss}" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#999999" FontSize="23px"/>
+                                        <Border x:Name="statistics"  Visibility="Collapsed" Grid.Column="1" Grid.Row="1" CornerRadius="14" Height="28" Width="64" Background="#FFFFFF" VerticalAlignment="Center"  HorizontalAlignment="Right" BorderBrush="#4E4E94" BorderThickness="1" 
+                                            PreviewMouseLeftButtonDown="statistics_PreviewMouseLeftButtonDown" Tag="{Binding }">
+                                            <TextBlock Text="统计"  Cursor="Hand"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#4E4E94" FontSize="12"/>
+                                        </Border>
+                                        <Border x:Name="start" Visibility="Collapsed" Grid.Column="1" Grid.Row="1"   CornerRadius="14" Height="28" Width="64" VerticalAlignment="Center" Background="#FFFFFF" HorizontalAlignment="Right" BorderBrush="#4E4E94" BorderThickness="1" 
+                                                  PreviewMouseLeftButtonDown="start_PreviewMouseLeftButtonDown" Tag="{Binding }">
+                                            <TextBlock Text="下发"  Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#4E4E94" FontSize="12"/>
+                                        </Border>
+                                        <Border x:Name="stop" Visibility="Collapsed" Grid.Column="1" Grid.Row="1"  CornerRadius="14" Height="28" Width="64" VerticalAlignment="Center" Background="#FFFFFF" HorizontalAlignment="Right" BorderBrush="#4E4E94" BorderThickness="1"
+                                                  PreviewMouseLeftButtonDown="stop_PreviewMouseLeftButtonDown"  Tag="{Binding }">
+                                            <TextBlock Text="答题中"  Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#4E4E94" FontSize="12"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding status}" Value="0">
+                                        <Setter TargetName="statisticsTxt" Property="Visibility" Value="Collapsed"/>
+                                        <Setter TargetName="start" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding status}" Value="1">
+                                        <Setter TargetName="statisticsTxt" Property="Visibility" Value="Visible"/>
+                                        <Setter TargetName="stop" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding status}" Value="2">
+                                        <Setter TargetName="statisticsTxt" Property="Visibility" Value="Visible"/>
+                                        <Setter TargetName="statistics" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Border>
+                <ContentControl Width="185" Height="190">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ContentControl">
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Image Source="/CalligraphyAssistantMain;component/Images\vote_nodata.png" Width="175" Height="170"/>
+                                            <TextBlock Text="暂无数据" FontSize="12" Foreground="#666666" FontFamily="黑体" HorizontalAlignment="Center" TextAlignment="Center"/>
+                                        </StackPanel>
+                                        <ControlTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding PaperCollectionPaging , Converter={StaticResource isNullConverter}}" Value="false">
+                                                <Setter  Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="340"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="340"/>
+                    </Grid.ColumnDefinitions>
+                    <local:PagerBar Grid.Column="1" Margin="20 10" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding Visibility,ElementName=view}"
+  PageSize="{Binding Path=Pager.PageSize, Mode=TwoWay}" 
+  PageCount="{Binding Path=Pager.PageCount, Mode=TwoWay}"  
+  CurrentPageIndex="{Binding Path=Pager.CurPageIndex, Mode=TwoWay}"></local:PagerBar>
+
+                    <Border x:Name="returnBtn" Grid.Column="2" CornerRadius="8"  Width="128" Height="48" HorizontalAlignment="Center" Margin="40 0" Background="#34C58B" PreviewMouseLeftButtonDown="ReturnBtn_PreviewMouseLeftButtonDown">
+                        <TextBlock Text="返回" FontSize="16" Foreground="#FFFFFF"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+        <local:RightToolBarControl Grid.Row="1" Width="94" VerticalAlignment="Center" HorizontalAlignment="Right"></local:RightToolBarControl>
+    </Grid>
+</UserControl>

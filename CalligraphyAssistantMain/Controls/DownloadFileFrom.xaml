@@ -1,0 +1,15 @@
+﻿<Window x:Class="CalligraphyAssistantMain.Controls.DownloadFileFrom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+        mc:Ignorable="d"
+        Title="DownloadFileFrom" Height="178" Width="510" Closed="Window_Closed">
+    <Grid Margin="0,0,0,12">
+        <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="45" Margin="20,25,0,0" VerticalAlignment="Top" Width="275"/>
+        <Button Content=" 下载" HorizontalAlignment="Left" Margin="315,26,0,0" VerticalAlignment="Top" Width="70" Click="Button_Click_1" Height="44"/>
+        <Label x:Name="label1" Content="" HorizontalAlignment="Left" Height="39" Margin="20,85,0,0" VerticalAlignment="Top" Width="275"/>
+        <Button Content="退出" HorizontalAlignment="Left" Margin="406,26,0,0" VerticalAlignment="Top" Width="70" Click="Button_Click_2" Height="45"/>
+    </Grid>
+</Window>

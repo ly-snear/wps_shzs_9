@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.StudentsAskQuestionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ItemsControl  VirtualizingStackPanel.IsVirtualizing="True"   VirtualizingPanel.VirtualizationMode="Recycling" ItemsSource="{Binding DataCollectionPaging}">
+            <ItemsControl.Template>
+                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="55" Width="384" VerticalAlignment="Top" Background="#FFFFFF" Margin="10 5" CornerRadius="4" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="img" Source="/CalligraphyAssistantMain;component/Images\HandUp.png" Height="20"/>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center"  HorizontalAlignment="Left" TextWrapping="Wrap"  Foreground="#555555"   TextTrimming="CharacterEllipsis" FontSize="16">
+                                  <Run Text="{Binding name}"/><Run x:Name="msg" Text="发起举手"/>
+                            </TextBlock>
+                           
+                            <Border x:Name="btnClose"  Grid.Column="2"  CornerRadius="14" Height="20" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                PreviewMouseLeftButtonDown="btnClose_PreviewMouseLeftButtonDown"  Tag="{Binding }">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/Close.png"  Stretch="Uniform"/>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding type}" Value="26">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="img" Property="Source"  Value="/CalligraphyAssistantMain;component/Images\AskQuestion.png"/>
+                            <Setter TargetName="msg" Property="Text" Value="发起提问"/>
+                        </DataTrigger>
+                        <!--<DataTrigger Binding="{Binding type}" Value="26">
+                            <Setter  Property="Visibility" Value="Visible"/>
+                        </DataTrigger>-->
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,68 @@
+﻿<Window x:Class="CalligraphyAssistantMain.FloatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalligraphyAssistantMain"
+        mc:Ignorable="d"
+        Title="艺学宝" Topmost="True" Height="500" Left="0" Width="64" WindowStyle="None" AllowsTransparency="True" Background="Transparent" OpacityMask="White" ShowInTaskbar="False" WindowStartupLocation="Manual" Loaded="Window_Loaded" Closing="Window_Closing" Icon="Images/Icon.ico">
+    <Grid x:Name="backGd">
+        <Grid x:Name="mainGd" Height="500" Width="64">
+            <Border x:Name="leftToolBar" CornerRadius="0,10,10,0" Width="64" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Border.Background>
+                    <ImageBrush ImageSource="Images/LeftMenuBack.png"/>
+                </Border.Background>
+                <Grid>
+                    <StackPanel Margin="0,0,0,15">
+                        <Grid Height="80" Tag="屏写" ToolTip="屏写" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                            <Image Width="32" Height="32" VerticalAlignment="Top" Margin="0,20,0,0" Source="Images/Icon1.png" ></Image>
+                            <TextBlock Text="屏写" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="16" Foreground="White"></TextBlock>
+                        </Grid>
+                        <StackPanel x:Name="classSp">
+                            <Grid Height="80" Tag="临摹" ToolTip="临摹" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                                <Image Width="32" Height="32" VerticalAlignment="Top" Margin="0,20,0,0" Source="Images/CalligraphyImage.png" ></Image>
+                                <TextBlock Text="临摹" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="16" Foreground="White"></TextBlock>
+                            </Grid>
+                            <Grid Height="80" Tag="示范" ToolTip="示范" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                                <Image Width="32" Height="32" VerticalAlignment="Top" Margin="0,20,0,0" Source="Images/Icon15.png" ></Image>
+                                <TextBlock Text="示范" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="16" Foreground="White"></TextBlock>
+                            </Grid>
+                            <Grid Height="80" Tag="拍照" ToolTip="拍照" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                                <Image Width="32" Height="32" VerticalAlignment="Top" Margin="0,20,0,0" Source="Images/CameraImage.png" ></Image>
+                                <TextBlock Text="拍照" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="16" Foreground="White"></TextBlock>
+                            </Grid>
+                            <Grid x:Name="classEndGd" Height="80" Tag="下课" ToolTip="结束上课" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                                <Image Width="32" Height="32" VerticalAlignment="Top" Margin="0,20,0,0" Source="Images/Icon3.png" ></Image>
+                                <TextBlock Text="下课" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="16" Foreground="White"></TextBlock>
+                            </Grid>
+                        </StackPanel>
+                        <Grid Height="80" Tag="返回" ToolTip="返回艺学宝" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                            <Image Width="28" Height="28" VerticalAlignment="Top" Margin="0,20,0,0" Source="Images/Icon6.png" ></Image>
+                            <TextBlock Text="返回" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="16" Foreground="White"></TextBlock>
+                        </Grid>
+                    </StackPanel>
+                    <Grid Cursor="Hand" Name="minBtn" MouseLeftButtonDown="minBtn_MouseLeftButtonDown" Background="Transparent" Width="12" Height="40" HorizontalAlignment="Right">
+                        <Path Fill="White" Data="M5,20 12,10 12,30 5,20"></Path>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border x:Name="leftMiniToolBar" Cursor="Hand" Visibility="Collapsed" HorizontalAlignment="Left" CornerRadius="0,5,5,0" Width="20" Height="50" VerticalAlignment="Center" MouseLeftButtonDown="leftMiniToolBar_MouseLeftButtonDown">
+                <Border.Background>
+                    <ImageBrush ImageSource="Images/LeftMenuBack.png"/>
+                </Border.Background>
+                <Grid Cursor="Hand" Background="Transparent" Width="12" Height="40" Margin="0,0,0,0" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Path Fill="White" Data="M5,20 12,10 12,30 5,20"></Path>
+                </Grid>
+            </Border>
+        </Grid>
+        <Viewbox x:Name="viewBox" Stretch="Uniform" StretchDirection="Both" Visibility="Collapsed"></Viewbox>
+    </Grid>
+</Window>

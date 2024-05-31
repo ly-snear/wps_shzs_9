@@ -1,0 +1,213 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.works.WorkReviewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls.works"
+             xmlns:code="clr-namespace:CalligraphyAssistantMain.Code"
+             xmlns:fivePoint="clr-namespace:CalligraphyAssistantMain.Controls.fivePoint"
+     xmlns:controls="clr-namespace:CalligraphyAssistantMain.Controls"
+     mc:Ignorable="d"  
+     d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="黑体"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <code:IsNullConverter x:Key="isNullConverter"/>
+            <code:NumberConverter x:Key="numberConverter"/>
+            <code:CutoffConverter x:Key="conutConverter"  />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/CalligraphyAssistantMain;component/Style\Style.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+           
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/Back.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0 20">
+            <Image Width="1778" Height="32" Margin="0,30,0,0" VerticalAlignment="Top" Source="/CalligraphyAssistantMain;component/Images/TitleBar.png"></Image>
+            <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" Text="作品互评" FontSize="32" FontWeight="Bold"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1"  Margin="180 10">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="{Binding WorkInfo.time,StringFormat={}{0:MM-dd }}" FontSize="32"/>
+                <TextBlock Text="{Binding WorkInfo.name_teacher}" FontSize="32"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Margin="170 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="10 0 60 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="userCount" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="32"></TextBlock>
+
+                <TextBlock Grid.Row="1" Text="{Binding CurrentShare.memberNames,Mode=OneWay}"  TextTrimming="WordEllipsis"  TextWrapping="Wrap" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="32"/>
+                <Border Grid.Row="2"  Margin="0 10" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  BorderThickness="1" BorderBrush="#191410"  Padding="5">
+                    <!--<Grid>
+                        <Image Source="{Binding WorkInfo.LocalPath}" Stretch="Uniform"/>
+                    </Grid>-->
+                    <ContentPresenter Content="{Binding ViewControl}"/>
+                </Border>
+
+            </Grid>
+
+            <Border Grid.Column="1"  Background="#F7F7F7" Height="780" CornerRadius="4"  VerticalAlignment="Top" BorderThickness="2" BorderBrush="#191410">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="8"/>
+                </Border.Effect>
+
+                <Border Grid.Row="1"  Margin="30 10 30 20" >
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="评价信息" FontSize="32" Foreground="#000000" HorizontalAlignment="Left"></TextBlock>
+                        <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" >
+                            <ItemsControl Margin="0 10 0 0" VirtualizingStackPanel.IsVirtualizing="True"  VirtualizingPanel.VirtualizationMode="Recycling"  ItemsSource="{Binding CurrentShareDiscussionlist,IsAsync=True}" >
+                                <ItemsControl.Template>
+                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                        <ItemsPresenter />
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type code:DiscussionInfo}">
+                                        <StackPanel x:Name="panel" HorizontalAlignment="Left">
+                                            <ContentControl x:Name="v1" Visibility="Collapsed">
+                                                <StackPanel  Margin="0 0 0 20" >
+                                                    <TextBlock HorizontalAlignment="{Binding HorizontalAlignment, ElementName=panel}" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 4" Foreground="#808080" Text="{Binding time,StringFormat={}{0:yyyy.MM.dd HH:mm:ss}}"/>
+                                                    <TextBlock  HorizontalAlignment="{Binding HorizontalAlignment, ElementName=panel}" VerticalAlignment="Center" FontSize="22" Foreground="#333333">
+                                              <Run Text="{Binding name_member}"/><Run Text=":对作品打星,"/><Run Text="{Binding last.star}"/><Run Text="星"></Run>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </ContentControl>
+                                            <ContentControl x:Name="v2" Visibility="Collapsed">
+                                                <StackPanel  Margin="0 0 0 20" >
+                                                    <TextBlock HorizontalAlignment="{Binding HorizontalAlignment, ElementName=panel}" VerticalAlignment="Center" FontSize="20" Margin="0 0 0 4" Foreground="#808080" Text="{Binding time,StringFormat={}{0:yyyy.MM.dd HH:mm:ss}}"/>
+                                                    <TextBlock  HorizontalAlignment="{Binding HorizontalAlignment, ElementName=panel}" VerticalAlignment="Center" FontSize="22" Foreground="#333333">
+                                               <Run Text="{Binding name_member}"/><Run Text=":对作品评定等级,"/><Run x:Name="grade" />
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </ContentControl>
+                                            <ContentControl x:Name="v3" >
+                                                <StackPanel  Margin="0 0 0 20" >
+                                                    <TextBlock HorizontalAlignment="{Binding HorizontalAlignment, ElementName=panel}" VerticalAlignment="Center" FontSize="20" IsEnabled="True" Margin="0 0 0 4" Foreground="#808080" Text="{Binding time,StringFormat={}{0:yyyy.MM.dd HH:mm:ss}}"/>
+                                                    <TextBlock  HorizontalAlignment="{Binding HorizontalAlignment, ElementName=panel}" VerticalAlignment="Center" FontSize="22" Foreground="#333333">
+                                                 <Run Text="{Binding name_member}"/><Run Text=":"/><Run Text="{Binding last.content}"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </ContentControl>
+
+                                        </StackPanel>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding grade}" Value="1">
+                                                <Setter  TargetName="grade" Property="Text" Value="A"/>
+                                                <Setter  TargetName="v2" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding grade}" Value="2">
+                                                <Setter  TargetName="grade" Property="Text" Value="B"/>
+                                                <Setter  TargetName="v2" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding grade}" Value="3">
+                                                <Setter  TargetName="grade" Property="Text" Value="C"/>
+                                                <Setter  TargetName="v2" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding grade}" Value="4">
+                                                <Setter  TargetName="grade" Property="Text" Value="D"/>
+                                                <Setter  TargetName="v2" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding grade}" Value="5">
+                                                <Setter  TargetName="grade" Property="Text" Value="E"/>
+                                                <Setter  TargetName="v2" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+
+                                            <DataTrigger Binding="{Binding last.star,Converter={StaticResource conutConverter},ConverterParameter='0'}" Value="true">
+                                                <Setter  TargetName="v1" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding last.content,Converter={StaticResource isNullConverter}}" Value="true">
+                                                <Setter  TargetName="v3" Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsSender}" Value="true" >
+                                                <Setter TargetName="panel" Property="HorizontalAlignment" Value="Right"></Setter>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <Grid x:Name="gridView" Grid.Row="2" Height="170" Background="#FFFFFF" VerticalAlignment="Bottom" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <fivePoint:FivePointStarGroup HorizontalAlignment="Stretch" x:Name="fivePointStarGroup1" 
+                               VerticalAlignment="Stretch" SelectBackground="#FF6600" Radius="10" 
+                               UnSelectBackground="DarkGray" ItemsCount="5" SelectCount="5" />
+                                <Border x:Name="scoringBtn" Grid.Row="2" CornerRadius="5"  Width="72" Height="28" HorizontalAlignment="Left" Margin="10 0" BorderThickness="1" BorderBrush="#4E4E94" PreviewMouseLeftButtonDown="scoringBtn_PreviewMouseLeftButtonDown" Background="#ffff" >
+                                    <TextBlock Text="打分" FontSize="16" Foreground="#4E4E94"/>
+                                </Border>
+                            </StackPanel>
+                            <Border  Grid.Row="1" BorderThickness="1" BorderBrush="#CDCDE3" CornerRadius="4" Height="80" Margin="10 0" Background="#F7F7F7" Padding="6">
+                                <TextBox x:Name="content"  BorderThickness="0" VerticalContentAlignment="Top" Background="#F7F7F7">
+                                    <TextBox.Resources>
+                                        <VisualBrush x:Key="HelpBrush" TileMode="None" Opacity="0.3" Stretch="None" AlignmentX="Left">
+                                            <VisualBrush.Visual>
+                                                <TextBlock FontStyle="Italic" Text="留下你对这个作品的印象吧…"/>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </TextBox.Resources>
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox">
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="">
+                                                    <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+
+                                </TextBox>
+                            </Border>
+                            <Border x:Name="sendBtn" Grid.Row="2" CornerRadius="5"  Width="72" Height="28" HorizontalAlignment="Left" Margin="10 0" Background="#34C58B" PreviewMouseLeftButtonDown="sendBtn_PreviewMouseLeftButtonDown">
+                                <TextBlock Text="发送" FontSize="16" Foreground="#FFFFFF"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+        <Border x:Name="closeBtn" Grid.Row="3" CornerRadius="8"  Width="128" Height="48" HorizontalAlignment="Center" Margin="40 0" Background="#34C58B" PreviewMouseLeftButtonDown="closeBtn_PreviewMouseLeftButtonDown">
+            <TextBlock Text="关闭" FontSize="16" Foreground="#FFFFFF"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,122 @@
+﻿<Window x:Class="CalligraphyAssistantMain.Controls.AddVoteControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+        mc:Ignorable="d"
+        d:DesignHeight="1080" d:DesignWidth="1920" WindowState="Maximized"  AllowsTransparency="True"  WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="黑体"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="RadioButton" x:Key="RadioButtonStyle">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#A2A2A2"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Margin" Value="0,0,15,0"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Width" Value="80"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Border x:Name="radioButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="2"
+                             BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                                <Grid>
+                                    <Border x:Name="Border" BorderThickness="0" CornerRadius="2"/>
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}" 
+                                           RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                        <Condition Property="IsChecked" Value="False" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="radioButtonBorder" Value="#8000"/>
+                                </MultiTrigger>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="Effect" TargetName="Border">
+                                        <Setter.Value>
+                                            <DropShadowEffect ShadowDepth="2" Direction="280"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#1890FF"/>
+                                    <Setter Property="IsEnabled" TargetName="Border" Value="False"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/Back.png"/>
+        </Grid.Background>
+        <Border Background="#FFFFFF" CornerRadius="24" Width="630" Height="322">
+            <Grid Margin="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="新建投票" HorizontalAlignment="Left" FontSize="16" Foreground="#333333" Margin="20 0"/>
+                <Grid x:Name="closeBtn" Height="25" Width="25" HorizontalAlignment="Right" PreviewMouseLeftButtonDown="closeBtn_PreviewMouseLeftButtonDown">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images\vote_close.png" Stretch="Uniform"/>
+                    </Grid.Background>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="45 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="投票项目" HorizontalAlignment="Left" FontSize="14" Foreground="#333333" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <RadioButton  Content="2个" Style="{DynamicResource RadioButtonStyle}" IsChecked="True"  Checked="RadioButton_Checked"/>
+                                <RadioButton  Content="3个" Style="{DynamicResource RadioButtonStyle}"  Checked="RadioButton_Checked"/>
+                                <RadioButton  Content="4个" Style="{DynamicResource RadioButtonStyle}"  Checked="RadioButton_Checked"/>
+                                <RadioButton  Content="5个" Style="{DynamicResource RadioButtonStyle}" Checked="RadioButton_Checked"/>
+                            </StackPanel>
+                        </Grid>
+                   
+                    </Grid>
+
+
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <Style  TargetType="Border">
+                                <Setter Property="Margin" Value="20 0"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Border CornerRadius="8" BorderThickness="1" Width="128" Height="48" BorderBrush="#CCCCCC" Background="#FFFFFF" PreviewMouseLeftButtonDown="closeBtn_PreviewMouseLeftButtonDown">
+                            <TextBlock Text="取消" FontSize="16" Foreground="#333333" />
+                        </Border>
+
+                        <Border x:Name="btn_ok" CornerRadius="8"  Width="128" Height="48" Background="#34C58B" PreviewMouseLeftButtonDown="btn_ok_PreviewMouseLeftButtonDown">
+                            <TextBlock Text="确认" FontSize="16" Foreground="#FFFFFF"/>
+                        </Border>
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

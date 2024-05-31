@@ -1,0 +1,185 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.CameraControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:CalligraphyAssistantMain.Controls"
+             xmlns:Code="clr-namespace:CalligraphyAssistantMain.Code"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="450" DataContextChanged="UserControl_DataContextChanged">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Code:CameraControlConverter x:Key="converter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Viewbox Stretch="Uniform">
+        <Grid Margin="10" Background="White" Width="630" Height="350">
+            <!--<Border>
+        <Border.Background>
+            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/Loading.png" Stretch="Fill"/>
+        </Border.Background>
+        <Border.Effect>
+            <DropShadowEffect Opacity="0.2" ShadowDepth="12"/>
+        </Border.Effect>
+
+    </Border>-->
+            <Border  BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.5*"/>
+                        <RowDefinition Height="7*"/>
+                        <RowDefinition Height="1.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png"/>
+                    <Image Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Margin="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="2" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Margin="4" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+            </Border>
+            <Grid Margin="25" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="8*"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="1" Margin="10,0,0,0">
+                    <Grid Background="Black" Name="playBackGd" Visibility="Collapsed">
+                        <!--<Controls:RtmpPlayerControl_WPF x:Name="rtmpPlayerControl" BeginPlay="rtmpPlayerControl_BeginPlay" MouseLeftButtonDown="rtmpPlayerControl_MouseLeftButtonDown" />-->
+                        <!--<Controls:ImageRenderGrid x:Name="imageRenderGrid" MouseLeftButtonDown="rtmpPlayerControl_MouseLeftButtonDown" />-->
+                        <Grid x:Name="loadingGd" Background="Black" Margin="0" Visibility="Collapsed">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="White" Text="加载中..."/>
+                        </Grid>
+                        <!--<Controls:FFmpegPlayer  x:Name="player" ></Controls:FFmpegPlayer>-->
+                        
+                    </Grid>
+                    <WrapPanel Grid.Row="2" Name="presetWp" IsEnabled="{Binding Mode,Converter={StaticResource converter},ConverterParameter=Enabled}" VerticalAlignment="Bottom" Height="50" Margin="10,0,0,0">
+                        <ItemsControl ItemsSource="{Binding StudentList}" FlowDirection="LeftToRight">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Controls:CameraPresetControl ToolTip="{Binding Name}" DataContext="{Binding}" ItemClick="NumberControl_ItemClick" Height="50" Width="45"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </WrapPanel>
+
+                </Grid>
+                <Grid x:Name="groupGd" Grid.Row="0">
+                    <Grid Width="80" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50">
+                        <!--<Grid.Background>
+                    <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/TextBack.png" Stretch="Uniform"/>
+                </Grid.Background>-->
+                        <TextBlock Text="{Binding Name}" FontSize="16" Foreground="#000000" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="100" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+                        <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding SelectedStudent}"></TextBlock>
+                    </Grid>
+                </Grid>
+
+
+                <Grid x:Name="controlBarGd" Width="70" HorizontalAlignment="Right" Grid.Column="1" Grid.RowSpan="2" >
+                    <StackPanel Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                        <Popup x:Name="morePop" Width="50" StaysOpen="False" AllowsTransparency="True" VerticalOffset="-300" HorizontalOffset="0">
+                            <StackPanel Width="50" HorizontalAlignment="Left" Background="Transparent">
+                                <Grid Cursor="Hand"  Width="50" Height="50" Background="#01000000" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 3" >
+                                    <Grid>
+                                        <Grid.Background>
+                                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/MoreButton2.png" Stretch="Uniform"/>
+                                        </Grid.Background>
+                                    </Grid>
+                                    <TextBlock Text="对比" FontSize="14" FontFamily="黑体" Foreground="#CC2B2B"  FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <Grid Cursor="Hand" x:Name="fullScreenBtn" MouseLeftButtonDown="fullScreenBtn_MouseLeftButtonDown" Background="#01000000" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 3" >
+                                    <Grid>
+                                        <Grid.Background>
+                                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/MoreButton2.png" Stretch="Uniform"/>
+                                        </Grid.Background>
+                                    </Grid>
+                                    <TextBlock Text="全屏" Foreground="#CC2B2B" Margin="0,-5,0,0" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <Grid Cursor="Hand" x:Name="takePhotoBtn" MouseLeftButtonDown="takePhotoBtn_MouseLeftButtonUp" Background="#01000000" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 3">
+                                    <Grid>
+                                        <Grid.Background>
+                                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/MoreButton2.png" Stretch="Uniform"/>
+                                        </Grid.Background>
+                                    </Grid>
+                                    <TextBlock Text="拍照" Foreground="#CC2B2B" Margin="0,-5,0,0" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <!--<Grid Cursor="Hand" x:Name="modeBtn" MouseLeftButtonDown="modeBtn_MouseLeftButtonUp" Background="#01000000" Width="50" Height="60" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+                  <Grid>
+                      <Grid.Background>
+                          <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/MoreButton2.png" Stretch="Uniform"/>
+                      </Grid.Background>
+                  </Grid>
+                  <TextBlock Text="{Binding Mode,Converter={StaticResource converter},ConverterParameter=Mode}" Foreground="#CC2B2B" Margin="0,-5,0,0" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+              </Grid>-->
+                                <Grid Cursor="Hand"  Width="50" Height="50" Background="#01000000" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 3">
+                                    <Grid>
+                                        <Grid.Background>
+                                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/MoreButton2.png" Stretch="Uniform"/>
+                                        </Grid.Background>
+                                    </Grid>
+                                    <TextBlock Text="录像" FontSize="14" FontFamily="黑体" Foreground="#CC2B2B"  FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <Grid Cursor="Hand" x:Name="shareBtn" Width="50" Height="50" Background="#01000000" VerticalAlignment="Bottom" HorizontalAlignment="Right" PreviewMouseLeftButtonDown="shareBtn_PreviewMouseLeftButtonDown" Margin="0 3">
+                                    <Grid>
+                                        <Grid.Background>
+                                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/MoreButton2.png" Stretch="Uniform"/>
+                                        </Grid.Background>
+                                    </Grid>
+                                    <TextBlock Text="分享" FontSize="14" FontFamily="黑体" Foreground="#CC2B2B"  FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </StackPanel>
+                        </Popup>
+                        <Grid x:Name="moreBtn" Margin="10 0 0 0" Cursor="Hand" Width="30" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" MouseLeftButtonUp="moreBtn_MouseLeftButtonUp">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/More.png" Stretch="Uniform"/>
+                            </Grid.Background>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</UserControl>

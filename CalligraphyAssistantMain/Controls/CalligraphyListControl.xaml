@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.CalligraphyListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+             mc:Ignorable="d"  
+             d:DesignHeight="1080" d:DesignWidth="1920" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CalligraphyAssistantMain;component/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="Transparent">
+        <Border Width="1400" Height="940" Background="White" BorderThickness="3" BorderBrush="Black">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.3" ShadowDepth="8"/>
+            </Border.Effect>
+        </Border>
+        <Grid Width="1400" Height="940">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid Margin="40,20,40,10">
+                    <Grid>
+                        <StackPanel>
+                            <Grid Height="70" Margin="0,30,0,0">
+                                <WrapPanel VerticalAlignment="Center">
+                                    <TextBlock x:Name="searchLb" Text="碑帖名称：" Width="140" TextAlignment="Right" FontSize="18" VerticalAlignment="Center"/>
+                                    <Border Width="460" Height="46" VerticalAlignment="Bottom" Background="#F1DA9E" HorizontalAlignment="Left" Margin="15,0,0,0" CornerRadius="5" BorderThickness="3" BorderBrush="Black">
+                                        <Grid>
+                                            <TextBox x:Name="searchTxt1" Margin="10,0" FontSize="18" FontWeight="Black" Background="Transparent" VerticalAlignment="Center" BorderThickness="0" Text=""></TextBox>
+                                            <TextBox x:Name="searchTxt2" Margin="10,0" FontSize="18" FontWeight="Black" Background="Transparent" VerticalAlignment="Center" BorderThickness="0" Text=""></TextBox>
+                                        </Grid>
+                                    </Border>
+                                    <Grid x:Name="searchGd1" Width="140" Margin="15,0,0,2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                                        <Image Cursor="Hand" x:Name="searchBtn1" Source="/CalligraphyAssistantMain;component/Images/DefaultButton.png" MouseLeftButtonDown="searchBtn1_MouseLeftButtonDown"/>
+                                        <TextBlock Cursor="Hand" Text="搜索" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" MouseLeftButtonDown="searchBtn1_MouseLeftButtonDown"></TextBlock>
+                                    </Grid>
+                                    <WrapPanel x:Name="wordCountWp" Margin="30,0,0,0" Height="40" Visibility="Collapsed">
+                                        <RadioButton x:Name="x1Rb" IsChecked="True" Style="{StaticResource RadioButtonStyle}" FontSize="18" Content="x1"/>
+                                        <RadioButton x:Name="x4Rb" Style="{StaticResource RadioButtonStyle}" FontSize="18" Content="x4"/>
+                                        <RadioButton x:Name="x8Rb" Style="{StaticResource RadioButtonStyle}" FontSize="18" Content="x8"/>
+                                    </WrapPanel>
+                                </WrapPanel>
+                            </Grid>
+                            <Grid MinHeight="40">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="朝代：" Width="140" TextAlignment="Right" FontSize="18" VerticalAlignment="Center"/>
+                                    <WrapPanel x:Name="dynastyWp" Margin="10,0" Grid.Column="1" VerticalAlignment="Center">
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" IsChecked="True" Content="默认"/>
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" Content="唐"/>
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" Content="宋"/>
+                                    </WrapPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid MinHeight="40">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="名家：" Width="140" TextAlignment="Right" FontSize="18" VerticalAlignment="Center"/>
+                                    <WrapPanel x:Name="authorWp" Margin="10,0" Grid.Column="1" VerticalAlignment="Center">
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" IsChecked="True" Content="默认"/>
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" Content="苏轼"/>
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" Content="陶渊明"/>
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" Content="李白"/>
+                                    </WrapPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid MinHeight="40">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="字体：" Width="140" TextAlignment="Right" FontSize="18" VerticalAlignment="Center"/>
+                                    <WrapPanel x:Name="fontWp" Margin="10,0" Grid.Column="1" VerticalAlignment="Center">
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" IsChecked="True" Content="默认"/>
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" Content="黑体"/>
+                                        <RadioButton Style="{StaticResource TextRadioButtonStyle}" Content="宋体"/>
+                                    </WrapPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid x:Name="imageGd" Visibility="Visible" Margin="12,0" Height="510">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <WrapPanel Name="imageWp" Margin="40,0,40,0">
+                                        <local:ImageItemControl5/>
+                                        <local:ImageItemControl5/>
+                                        <local:ImageItemControl5/>
+                                        <local:ImageItemControl5/>
+                                        <local:ImageItemControl5/>
+                                        <local:ImageItemControl5/>
+                                        <local:ImageItemControl5/>
+                                        <local:ImageItemControl5/>
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </Grid>
+                            <Grid x:Name="wordGd" Margin="12,0" Height="510" Visibility="Collapsed">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <WrapPanel Name="wordWp" Margin="40,0,40,0">
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </Grid>
+                            <Grid>
+                                <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Grid Cursor="Hand" Background="Transparent" x:Name="previousBtn" MouseLeftButtonDown="previousBtn_MouseLeftButtonDown" Width="50" Height="50">
+                                        <Image VerticalAlignment="Center" Width="26" Height="26" Source="/CalligraphyAssistantMain;component/Images/Previous.png"></Image>
+                                    </Grid>
+                                    <TextBlock x:Name="pageLb1" VerticalAlignment="Center" Margin="5,0" Text="1/1" FontSize="16" HorizontalAlignment="Center" Foreground="Black"/>
+                                    <TextBlock x:Name="pageLb2" Visibility="Collapsed" VerticalAlignment="Center" Margin="5,0" Text="1/1" FontSize="16" HorizontalAlignment="Center" Foreground="Black"/>
+                                    <Grid Cursor="Hand" Background="Transparent" x:Name="nextBtn" MouseLeftButtonDown="nextBtn_MouseLeftButtonDown" Width="50" Height="50">
+                                        <Image Width="26" Height="26" Source="/CalligraphyAssistantMain;component/Images/Previous.png" RenderTransformOrigin="0.5,0.5">
+                                            <Image.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                                    <SkewTransform AngleY="0" AngleX="0"/>
+                                                    <RotateTransform Angle="0"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                    </Grid>
+                                </WrapPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid Width="140" Height="62" Margin="200,0,0,25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                    <Image Cursor="Hand" x:Name="imageBtn2" Source="/CalligraphyAssistantMain;component/Images/DefaultButton.png" MouseLeftButtonDown="imageBtn2_MouseLeftButtonUp"/>
+                    <TextBlock Cursor="Hand" Text="单字" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" MouseLeftButtonDown="imageBtn2_MouseLeftButtonUp"></TextBlock>
+                </Grid>
+                <Grid Width="140" Height="62" Margin="40,0,0,25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                    <Image Cursor="Hand" x:Name="imageBtn1" Source="/CalligraphyAssistantMain;component/Images/DefaultButton2.png" MouseLeftButtonDown="imageBtn1_MouseLeftButtonUp"/>
+                    <TextBlock Cursor="Hand" Text="碑帖" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" MouseLeftButtonDown="imageBtn1_MouseLeftButtonUp"></TextBlock>
+                </Grid>
+                <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Grid x:Name="selectedGd" Width="140" Height="62" Margin="0,0,20,25" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Image Cursor="Hand" x:Name="selectedBtn" Source="/CalligraphyAssistantMain;component/Images/DefaultButton.png" MouseLeftButtonDown="selectedBtn_MouseLeftButtonDown"/>
+                        <TextBlock x:Name="selectedLb" Cursor="Hand" Text="已选择(0/7)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" MouseLeftButtonDown="selectedBtn_MouseLeftButtonDown"></TextBlock>
+                    </Grid>
+                    <Grid x:Name="okGd" Width="140" Height="62" Margin="0,0,20,25" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Image Cursor="Hand" x:Name="okBtn" Source="/CalligraphyAssistantMain;component/Images/DefaultButton.png" MouseLeftButtonDown="okBtn_MouseLeftButtonDown"/>
+                        <TextBlock Cursor="Hand" Text="确定" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" MouseLeftButtonDown="okBtn_MouseLeftButtonDown"></TextBlock>
+                    </Grid>
+                    <Grid Width="140" Height="62" Margin="0,0,40,25" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Image Cursor="Hand" x:Name="cancelBtn" Source="/CalligraphyAssistantMain;component/Images/DefaultButton.png" MouseLeftButtonDown="cancelBtn_MouseLeftButtonUp"/>
+                        <TextBlock Cursor="Hand" Text="返回" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" MouseLeftButtonDown="cancelBtn_MouseLeftButtonUp"></TextBlock>
+                    </Grid>
+                </WrapPanel>
+
+            </Grid>
+            <Image Margin="5" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png"/>
+            <Image Margin="5" Width="40" Height="40"  HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image Margin="5" Width="40" Height="40"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="2" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image Margin="5" Width="40" Height="40"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+        <local:CalligraphyListDetailsControl x:Name="calligraphyListDetailsControl" DetilsListChanged="calligraphyListDetailsControl_DetilsListChanged" Visibility="Collapsed" />
+    </Grid>
+</UserControl>

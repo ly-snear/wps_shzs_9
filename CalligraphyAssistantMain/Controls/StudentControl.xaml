@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.StudentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+             xmlns:Code="clr-namespace:CalligraphyAssistantMain.Code"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CalligraphyAssistantMain;component/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Code:StudentControlConverter x:Key="studentControlConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="tipLb" ToolTip="双击学生全屏查看" IsEnabled="{Binding IsConnectedAndLogined,Converter={StaticResource studentControlConverter},ConverterParameter=Enabled}" Width="134" Height="80" Margin="3,0,3,5">
+        <Border x:Name="rectBd1" Margin="0,4,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown" CornerRadius="2" BorderBrush="Black" Background="#F1DA9E" BorderThickness="2" Width="40" Height="26" VerticalAlignment="Top">
+        </Border>
+        <Grid VerticalAlignment="Top" Width="40" Height="26" HorizontalAlignment="Right">
+            <CheckBox Background="Transparent" Style="{StaticResource CheckBoxStyle}" x:Name="checkBox" Cursor="Hand" Grid.Column="0" FontSize="18" Foreground="#424242" HorizontalAlignment="Left" Content="" VerticalAlignment="Center" Margin="0,2"></CheckBox>
+        </Grid>
+        <Border x:Name="rectBd2" Margin="0,0,0,4" MouseLeftButtonDown="Border_MouseLeftButtonDown" Width="96" Background="#F1DA9E" CornerRadius="3" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="2" Height="43">
+            <!-- <TextBlock Text="{Binding Name}" FontSize="18" Foreground="{Binding IsConnectedAndLogined,Converter={StaticResource studentControlConverter},ConverterParameter=Color}" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/> -->
+            <TextBlock Text="{Binding Name}" FontSize="18" Foreground="{Binding Foreground}" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Border> 
+        <Rectangle x:Name="focusRect" StrokeThickness="2" StrokeDashArray="4" Stroke="#FEA356" Visibility="Collapsed" />
+    </Grid>
+</UserControl>

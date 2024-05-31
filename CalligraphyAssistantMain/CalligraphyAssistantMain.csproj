@@ -1,0 +1,1345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A19B1E96-65B8-403A-8167-F543B2CF0BBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CalligraphyAssistantMain</RootNamespace>
+    <AssemblyName>CalligraphyAssistantMain</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NODEV</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AVCaptureLib">
+      <HintPath>..\Lib\AVCaptureLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp">
+      <HintPath>..\Lib\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>..\Lib\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Wpf">
+      <HintPath>..\Lib\CefSharp.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonLib">
+      <HintPath>..\Lib\CommonLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.7\lib\net48\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib">
+      <HintPath>..\Lib\DirectShowLib.dll</HintPath>
+    </Reference>
+    <Reference Include="FFmpeg.AutoGen">
+      <HintPath>..\Lib\FFmpeg.AutoGen.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.19.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.19.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph.Beta, Version=0.47.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.Beta.0.47.0-preview\lib\net461\Microsoft.Graph.Beta.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph.Core, Version=1.25.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.Core.1.25.1\lib\net45\Microsoft.Graph.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.PowerPoint.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1004\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MoonPdfLib">
+      <HintPath>..\Lib\MoonPdfLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MouseKeyboardActivityMonitor, Version=4.0.5150.10665, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MouseKeyboardActivityMonitor.4.0.5150.10665\lib\net20\MouseKeyboardActivityMonitor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Lib\Office.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.4.1.0\lib\net40\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="Qiniu">
+      <HintPath>..\Lib\Qiniu.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.5.2.0\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="SharpDX">
+      <HintPath>..\Lib\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\Lib\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\Lib\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFMediaKit, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFMediaKit.2.2.0\lib\WPFMediaKit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\CommitMaterialAnswer.cs" />
+    <Compile Include="Code\CommitQuickAnswer.cs" />
+    <Compile Include="Code\DispatcherHelper.cs" />
+    <Compile Include="Code\EventNotify.cs" />
+    <Compile Include="Code\FFmpegBinariesHelper.cs" />
+    <Compile Include="Code\HttpClass.cs" />
+    <Compile Include="Code\JsonHelper.cs" />
+    <Compile Include="Code\MaterialCount.cs" />
+    <Compile Include="Code\MaterialCountData.cs" />
+    <Compile Include="Code\Message.cs" />
+    <Compile Include="Code\MQCenter.cs" />
+    <Compile Include="Code\OptionItem.cs" />
+    <Compile Include="Code\ProgressBarValue.cs" />
+    <Compile Include="Code\QuickAnswerStudent.cs" />
+    <Compile Include="Code\QuickQuestionAnswersData.cs" />
+    <Compile Include="Code\Result.cs" />
+    <Compile Include="Code\RtmpHeper.cs" />
+    <Compile Include="Code\ShareCopyBook.cs" />
+    <Compile Include="Code\ShareCopyBookData.cs" />
+    <Compile Include="Code\SidebarAction.cs" />
+    <Compile Include="Code\StudentSendMessage.cs" />
+    <Compile Include="Code\StudentWorkCommentItem.cs" />
+    <Compile Include="Code\WatermarkService.cs" />
+    <Compile Include="Code\WindowsNativeMethods.cs" />
+    <Compile Include="Controls\ClassInteractionControl.xaml.cs">
+      <DependentUpon>ClassInteractionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Code\AnkHotKey.cs" />
+    <Compile Include="Code\AVPacketSender.cs" />
+    <Compile Include="Code\EventArgs.cs" />
+    <Compile Include="Code\Events.cs" />
+    <Compile Include="Code\ExtendHelper.cs" />
+    <Compile Include="Code\HttpUtility.cs" />
+    <Compile Include="Code\IconTools.cs" />
+    <Compile Include="Code\ImageConverter.cs" />
+    <Compile Include="Code\IAVPacketProvider.cs" />
+    <Compile Include="Code\LivePacketParser.cs" />
+    <Compile Include="Code\PasswordBoxHelper.cs" />
+    <Compile Include="Code\RemoteMessage.cs" />
+    <Compile Include="Code\ScreenCapture.cs" />
+    <Compile Include="Code\SocketClient.cs" />
+    <Compile Include="Code\SocketServer.cs" />
+    <Compile Include="Code\StudentSocketClient.cs" />
+    <Compile Include="Code\VideoCaptureEx.cs" />
+    <Compile Include="Code\VideoDecoder.cs" />
+    <Compile Include="Code\VideoEncoder.cs" />
+    <Compile Include="Controls\AddQuickAnswerControl.xaml.cs">
+      <DependentUpon>AddQuickAnswerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddVoteControl.xaml.cs">
+      <DependentUpon>AddVoteControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlankStudentControl.xaml.cs">
+      <DependentUpon>BlankStudentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CalligraphyListControl.xaml.cs">
+      <DependentUpon>CalligraphyListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CalligraphyListDetailsControl.xaml.cs">
+      <DependentUpon>CalligraphyListDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CameraGroupControlEx.xaml.cs">
+      <DependentUpon>CameraGroupControlEx.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CameraGroupControl.xaml.cs">
+      <DependentUpon>CameraGroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChromiumWebBrowserEx.cs" />
+    <Compile Include="Controls\ClassRoomSeatControl.xaml.cs">
+      <DependentUpon>ClassRoomSeatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CommentAnswerControl.xaml.cs">
+      <DependentUpon>CommentAnswerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\countdownControl.xaml.cs">
+      <DependentUpon>countdownControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DocFrom.xaml.cs">
+      <DependentUpon>DocFrom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DocmentViewControl.xaml.cs">
+      <DependentUpon>DocmentViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DownloadFileFrom.xaml.cs">
+      <DependentUpon>DownloadFileFrom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DownloadItemControl.xaml.cs">
+      <DependentUpon>DownloadItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FileDistributionListControl.xaml.cs">
+      <DependentUpon>FileDistributionListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\fivePoint\FivePointStar.cs" />
+    <Compile Include="Controls\fivePoint\FivePointStarGroup.xaml.cs">
+      <DependentUpon>FivePointStarGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\fivePoint\FivePointStarModel.cs" />
+    <Compile Include="Controls\FullScreenControl.xaml.cs">
+      <DependentUpon>FullScreenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageItemControl5.xaml.cs">
+      <DependentUpon>ImageItemControl5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageItemControl6.xaml.cs">
+      <DependentUpon>ImageItemControl6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageRenderGrid.cs" />
+    <Compile Include="Controls\ImageViewControl.xaml.cs">
+      <DependentUpon>ImageViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ItemCopyBook.xaml.cs">
+      <DependentUpon>ItemCopyBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ItemCopyBookPrepare.xaml.cs">
+      <DependentUpon>ItemCopyBookPrepare.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MaterialCountControl.xaml.cs">
+      <DependentUpon>MaterialCountControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MaterialSendControl.xaml.cs">
+      <DependentUpon>MaterialSendControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MediaFrom.xaml.cs">
+      <DependentUpon>MediaFrom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Pager.cs" />
+    <Compile Include="Controls\PagerBar.cs" />
+    <Compile Include="Controls\PagerButton.cs" />
+    <Compile Include="Controls\PaperControl.xaml.cs">
+      <DependentUpon>PaperControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PaperStatisticControl.xaml.cs">
+      <DependentUpon>PaperStatisticControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PDFFrom.xaml.cs">
+      <DependentUpon>PDFFrom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PPTFrom.xaml.cs">
+      <DependentUpon>PPTFrom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\QuickAnswerStudentControl.xaml.cs">
+      <DependentUpon>QuickAnswerStudentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\QuickAnswerSubjectiveControl.xaml.cs">
+      <DependentUpon>QuickAnswerSubjectiveControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\QuickQuestionAnswersControl.xaml.cs">
+      <DependentUpon>QuickQuestionAnswersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectCopyBookFromPrepareLessonControl.xaml.cs">
+      <DependentUpon>SelectCopyBookFromPrepareLessonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectCopyBookFromTigerControl.xaml.cs">
+      <DependentUpon>SelectCopyBookFromTigerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectCopyBookWordFromTigerControl.xaml.cs">
+      <DependentUpon>SelectCopyBookWordFromTigerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SendCopyBookControl.xaml.cs">
+      <DependentUpon>SendCopyBookControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StudentsAskQuestionControl.xaml.cs">
+      <DependentUpon>StudentsAskQuestionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TaskCountControl.xaml.cs">
+      <DependentUpon>TaskCountControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VideoFrom.xaml.cs">
+      <DependentUpon>VideoFrom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\PlayVideo.xaml.cs">
+      <DependentUpon>PlayVideo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PublishAnswerControl.xaml.cs">
+      <DependentUpon>PublishAnswerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\QuickAnswerlistControl.xaml.cs">
+      <DependentUpon>QuickAnswerlistControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RandomlyDrawPeopleControl.xaml.cs">
+      <DependentUpon>RandomlyDrawPeopleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ResourceDirectoryControl.xaml.cs">
+      <DependentUpon>ResourceDirectoryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ResourceItemControl.xaml.cs">
+      <DependentUpon>ResourceItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RightToolBarControl.xaml.cs">
+      <DependentUpon>RightToolBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectStudentsControl.xaml.cs">
+      <DependentUpon>SelectStudentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SettingControl.xaml.cs">
+      <DependentUpon>SettingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BeginClassControl.xaml.cs">
+      <DependentUpon>BeginClassControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HintPasswordBox.xaml.cs">
+      <DependentUpon>HintPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HintTextbox.xaml.cs">
+      <DependentUpon>HintTextbox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageItemControl4.xaml.cs">
+      <DependentUpon>ImageItemControl4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListBoxItemControl.xaml.cs">
+      <DependentUpon>ListBoxItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StudentControl.xaml.cs">
+      <DependentUpon>StudentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\studentGrouping\CameraContrastControl.xaml.cs">
+      <DependentUpon>CameraContrastControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\studentGrouping\CameraItemControl.xaml.cs">
+      <DependentUpon>CameraItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\studentGrouping\StudentCameraControl.xaml.cs">
+      <DependentUpon>StudentCameraControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\studentGrouping\StudentCameraGroupControl.xaml.cs">
+      <DependentUpon>StudentCameraGroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\studentGrouping\StudentGroupingControl.xaml.cs">
+      <DependentUpon>StudentGroupingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StudentListControl.xaml.cs">
+      <DependentUpon>StudentListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TipControl.xaml.cs">
+      <DependentUpon>TipControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TitleControl.xaml.cs">
+      <DependentUpon>TitleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UDPPlayerControl.cs" />
+    <Compile Include="Controls\USBPlayerControl.cs" />
+    <Compile Include="Controls\VoteListControl.xaml.cs">
+      <DependentUpon>VoteListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WebViewControl.xaml.cs">
+      <DependentUpon>WebViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WelcomeControl.xaml.cs">
+      <DependentUpon>WelcomeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\PlayMediaControl.xaml.cs">
+      <DependentUpon>PlayMediaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\StudentWorkItemControl.xaml.cs">
+      <DependentUpon>StudentWorkItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\StudentWorkMutualCommentControl.xaml.cs">
+      <DependentUpon>StudentWorkMutualCommentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\StudentWorksControl.xaml.cs">
+      <DependentUpon>StudentWorksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\TeacherWorkItemControl.xaml.cs">
+      <DependentUpon>TeacherWorkItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\TeacherWorksControl.xaml.cs">
+      <DependentUpon>TeacherWorksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\WorkCommentListReviewControl.xaml.cs">
+      <DependentUpon>WorkCommentListReviewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\WorkReviewControl.xaml.cs">
+      <DependentUpon>WorkReviewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\WorksContrastControl.xaml.cs">
+      <DependentUpon>WorksContrastControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\WorkShareList.xaml.cs">
+      <DependentUpon>WorkShareList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\works\WorksControl.xaml.cs">
+      <DependentUpon>WorksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Message\CommandMessage.cs" />
+    <Compile Include="Message\DataMessage.cs" />
+    <Compile Include="Message\HeartbeatMessage.cs" />
+    <Compile Include="Message\ImageMessage.cs" />
+    <Compile Include="Message\LoginFeedbackMessage.cs" />
+    <Compile Include="Message\LoginMessage.cs" />
+    <Compile Include="Message\VideoFrameMessage.cs" />
+    <Compile Include="QuickQuestionAnswers.xaml.cs">
+      <DependentUpon>QuickQuestionAnswers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceFile.cs" />
+    <Compile Include="StatisticControl.xaml.cs">
+      <DependentUpon>StatisticControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WriteScreenWindow.xaml.cs">
+      <DependentUpon>WriteScreenWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\ClassInteractionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddQuickAnswerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddVoteControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlankStudentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CalligraphyListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CalligraphyListDetailsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CameraGroupControlEx.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CameraGroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassRoomSeatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CommentAnswerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\countdownControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DocFrom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DocmentViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DownloadFileFrom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DownloadItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FileDistributionListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\fivePoint\FivePointStarGroup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FullScreenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageItemControl5.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageItemControl6.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ItemCopyBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ItemCopyBookPrepare.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MaterialCountControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MaterialSendControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MediaFrom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PaperControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PaperStatisticControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PDFFrom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PPTFrom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\QuickAnswerStudentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\QuickAnswerSubjectiveControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\QuickQuestionAnswersControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SelectCopyBookFromPrepareLessonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SelectCopyBookFromTigerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SelectCopyBookWordFromTigerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SendCopyBookControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StudentsAskQuestionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TaskCountControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VideoFrom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\PlayVideo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PublishAnswerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RightToolBarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\studentGrouping\CameraContrastControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\studentGrouping\CameraItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\studentGrouping\StudentCameraControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\studentGrouping\StudentCameraGroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\studentGrouping\StudentGroupingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\PlayMediaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\StudentWorkItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\StudentWorkMutualCommentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\StudentWorksControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\TeacherWorkItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\TeacherWorksControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\WorkCommentListReviewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\WorkReviewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\WorksContrastControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\WorkShareList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\works\WorksControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuickQuestionAnswers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatisticControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\PageBarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\QuickAnswerlistControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RandomlyDrawPeopleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ResourceDirectoryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ResourceItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SelectStudentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SettingControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BeginClassControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CameraControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CameraListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CameraPresetControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HintPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HintTextbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageEditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageItemControl4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageItemControl3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageTagControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ListBoxItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SoftwareControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StudentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StudentListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TipControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TitleControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VoteListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WebViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\WelcomeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WriteScreenControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageItemControl2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageItemControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SendImagesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FloatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Code\Common.cs" />
+    <Compile Include="Code\Consts.cs" />
+    <Compile Include="Code\Converter.cs" />
+    <Compile Include="Code\Enums.cs" />
+    <Compile Include="Code\FFmpegHelper.cs" />
+    <Compile Include="Code\MessageBoxEx.cs" />
+    <Compile Include="Code\SDL2.cs" />
+    <Compile Include="Code\SDLHelperEx.cs" />
+    <Compile Include="Code\Types.cs" />
+    <Compile Include="Code\VideoFrameConverterEx.cs" />
+    <Compile Include="Code\VideoStreamDecoderEx.cs" />
+    <Compile Include="Code\WebClientEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Code\WinAPI.cs" />
+    <Compile Include="Controls\AppControl.xaml.cs">
+      <DependentUpon>AppControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CameraControl.xaml.cs">
+      <DependentUpon>CameraControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CameraListControl.xaml.cs">
+      <DependentUpon>CameraListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CameraPresetControl.xaml.cs">
+      <DependentUpon>CameraPresetControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DrawBoardCanvas.cs" />
+    <Compile Include="Controls\ImageEditControl.xaml.cs">
+      <DependentUpon>ImageEditControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageItemControl3.xaml.cs">
+      <DependentUpon>ImageItemControl3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageListControl.xaml.cs">
+      <DependentUpon>ImageListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageTagControl.xaml.cs">
+      <DependentUpon>ImageTagControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SoftwareControl.xaml.cs">
+      <DependentUpon>SoftwareControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WriteScreenControl.xaml.cs">
+      <DependentUpon>WriteScreenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageItemControl2.xaml.cs">
+      <DependentUpon>ImageItemControl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageItemControl1.xaml.cs">
+      <DependentUpon>ImageItemControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainControl.xaml.cs">
+      <DependentUpon>MainControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RtmpPlayerControl_WPF.cs" />
+    <Compile Include="Controls\SendImagesControl.xaml.cs">
+      <DependentUpon>SendImagesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextPath.cs" />
+    <Compile Include="FloatWindow.xaml.cs">
+      <DependentUpon>FloatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Style\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WriteScreenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\System.Xml.XmlElement.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo.png" />
+    <Resource Include="Images\Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconfont.ttf" />
+    <None Include="Resources\Loading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Item.png" />
+    <Resource Include="Images\Item2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Loading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Button1.png" />
+    <Resource Include="Images\Button1_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Button2.png" />
+    <Resource Include="Images\Button2_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Button3.png" />
+    <Resource Include="Images\Button3_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MoreButton.png" />
+    <Resource Include="Images\MoreButton2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TextBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MainButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MainButtonHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SelectButton.png" />
+    <Resource Include="Images\SelectButton2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon1.png" />
+    <Resource Include="Images\Icon1_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LeftMenuBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TitleBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RightMenuBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\4Cell.png" />
+    <Resource Include="Images\9Cell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CalligraphyImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FullModeImage.png" />
+    <Resource Include="Images\PartModeImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SelectButton3.png" />
+    <Resource Include="Images\SelectButton3_2.png" />
+    <Resource Include="Images\SelectButton4.png" />
+    <Resource Include="Images\SelectButton4_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DefaultButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DefaultButton2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ButtonIcon1.png" />
+    <Resource Include="Images\ButtonIcon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CloseButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LeftTopBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Temp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\NumberBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageButton1.png" />
+    <Resource Include="Images\ImageButton2.png" />
+    <Resource Include="Images\ImageButton3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BorderBottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Works.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageButton4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageEditIcon1.png" />
+    <Resource Include="Images\ImageEditIcon2.png" />
+    <Resource Include="Images\ImageEditIcon3.png" />
+    <Resource Include="Images\ImageEditIcon4.png" />
+    <Resource Include="Images\ImageEditIcon5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageEditIcon6.png" />
+    <Resource Include="Images\ImageEditIcon7.png" />
+    <Resource Include="Images\ImageEditIcon8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageEditIcon2_2.png" />
+    <Resource Include="Images\ImageEditIcon3_2.png" />
+    <Resource Include="Images\ImageEditIcon4_2.png" />
+    <Resource Include="Images\ImageEditIcon6_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CloseButton2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon10.png" />
+    <Resource Include="Images\Icon11.png" />
+    <Resource Include="Images\Icon12.png" />
+    <Resource Include="Images\Icon13.png" />
+    <Resource Include="Images\Icon14.png" />
+    <Resource Include="Images\Icon7.png" />
+    <Resource Include="Images\Icon8.png" />
+    <Resource Include="Images\Icon9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageEditIcon10.png" />
+    <Resource Include="Images\ImageEditIcon10_2.png" />
+    <Resource Include="Images\ImageEditIcon11.png" />
+    <Resource Include="Images\ImageEditIcon11_2.png" />
+    <Resource Include="Images\ImageEditIcon12.png" />
+    <Resource Include="Images\ImageEditIcon12_2.png" />
+    <Resource Include="Images\ImageEditIcon13.png" />
+    <Resource Include="Images\ImageEditIcon13_2.png" />
+    <Resource Include="Images\ImageEditIcon14.png" />
+    <Resource Include="Images\ImageEditIcon14_2.png" />
+    <Resource Include="Images\ImageEditIcon9.png" />
+    <Resource Include="Images\ImageEditIcon9_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LoginIcon1.png" />
+    <Resource Include="Images\LoginIcon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LoginIcon3.png" />
+    <Resource Include="Images\LoginIcon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LoginIcon5.png" />
+    <Resource Include="Images\LoginIcon6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\4Cell_2.png" />
+    <Resource Include="Images\9Cell_2.png" />
+    <Resource Include="Images\NoPhotosImage_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\NoPhotosImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SettingButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Loading2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Loading3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BlackScreen.png" />
+    <Resource Include="Images\WhiteScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\StudentList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\NextImage.png" />
+    <Resource Include="Images\PreviousImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageEditIcon15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageEditIcon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CameraImage.png" />
+    <Resource Include="Images\DownloadedIcon.png" />
+    <Resource Include="Images\DownloadingIcon.png" />
+    <Resource Include="Images\Icon19.png" />
+    <Resource Include="Images\RecordImage.png" />
+    <Resource Include="Images\ResourceDirectoryButton.png" />
+    <Resource Include="Images\StopRecordImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageEditIcon17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon21.png" />
+    <Resource Include="Images\Icon22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\magnifier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\vote_add.png" />
+    <Resource Include="Images\vote_close.png" />
+    <Resource Include="Images\vote_nodata.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon27.png" />
+    <Resource Include="Images\Icon28.png" />
+    <Resource Include="Images\Icon29.png" />
+    <Resource Include="Images\Icon30.png" />
+    <Resource Include="Images\Icon31.png" />
+    <Resource Include="Images\Icon32.png" />
+    <Resource Include="Images\Icon33.png" />
+    <Resource Include="Images\Icon34.png" />
+    <Resource Include="Images\Icon35.png" />
+    <Resource Include="Images\Icon36.png" />
+    <Resource Include="Images\Icon37.png" />
+    <Resource Include="Images\Icon38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_media_pause.png" />
+    <Resource Include="Images\icon_media_pause1.png" />
+    <Resource Include="Images\icon_media_play.png" />
+    <Resource Include="Images\icon_media_play1.png" />
+    <Resource Include="Images\icon_media_tomax.png" />
+    <Resource Include="Images\icon_media_tomin.png" />
+    <Resource Include="Images\icon_media_voice0.png" />
+    <Resource Include="Images\icon_media_voice1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AskQuestion.png" />
+    <Resource Include="Images\HandUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="files.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Office1">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>99</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets" Condition="Exists('..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.6.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.6.4\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props'))" />
+  </Target>
+  <Import Project="..\packages\Fody.6.6.4\build\Fody.targets" Condition="Exists('..\packages\Fody.6.6.4\build\Fody.targets')" />
+</Project>

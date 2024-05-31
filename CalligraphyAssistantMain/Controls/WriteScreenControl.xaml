@@ -1,0 +1,121 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls" 
+             x:Class="CalligraphyAssistantMain.Controls.WriteScreenControl" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CalligraphyAssistantMain;component/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="backGd">
+        <local:DrawBoardCanvas x:Name="drawBoardCanvas" Background="White" MouseLeftButtonDown="drawBoardCanvas_MouseLeftButtonDown" MouseMove="drawBoardCanvas_MouseMove" MouseLeftButtonUp="drawBoardCanvas_MouseLeftButtonUp" MouseRightButtonDown="drawBoardCanvas_MouseRightButtonDown"/>
+        <Border x:Name="topBarBd" Background="#F2F2F2" Width="467" Height="50" CornerRadius="0,0,5,5" VerticalAlignment="Top">
+            <Grid>
+                <Border BorderBrush="#C8C8C8" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5"></Border>
+                <WrapPanel x:Name="colorWp" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="30" Height="24" Fill="Red"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="Orange"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="Yellow"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="Green"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="Cyan"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="Blue"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="Purple"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="White"></Rectangle>
+                    <Rectangle Cursor="Hand" MouseLeftButtonDown="ColorWp_MouseLeftButtonUp" Margin="0,0,2,0" Width="20" Height="24" Fill="Black"></Rectangle>
+                    <Border Background="White" Margin="10,0,0,0" Width="90" Height="24" BorderBrush="Black" BorderThickness="1" >
+                        <Label Cursor="Hand" MouseLeftButtonDown="lineStyleBtn_MouseLeftButtonUp" Name="lineStyleBtn" Background="{StaticResource SolidLineBrush}" Margin="5,0" Width="80" Height="20" ToolTip="线类型"></Label>
+                    </Border>
+                    <ComboBox x:Name="lineStyleCb" SelectionChanged="lineStyleCb_SelectionChanged" Margin="-90,0,0,0" HorizontalAlignment="Left" Width="0">
+                        <Label Width="72" ToolTip="实线" Margin="5,2,5,2" Height="22" Background="{StaticResource SolidLineBrush}"></Label>
+                        <Label Width="72" ToolTip="虚线" Margin="5,2,5,2" Height="22" Background="{StaticResource DashLineBrush}"></Label>
+                        <Label Width="72" ToolTip="虚线点" Margin="5,2,5,2" Height="22" Background="{StaticResource DashDotLineBrush}"></Label>
+                        <Label Width="72" ToolTip="虚线点点" Margin="5,2,5,2" Height="22" Background="{StaticResource DashDotDotLineBrush}"></Label>
+                        <Label Width="72" ToolTip="点" Margin="5,2,5,2" Height="22" Background="{StaticResource DotLineBrush}"></Label>
+                    </ComboBox>
+                    <Border Background="White" Margin="10,0,0,0" Width="40" Height="24" BorderBrush="Black" BorderThickness="1" >
+                        <TextBlock Cursor="Hand" MouseLeftButtonDown="lineSizeBtn_MouseLeftButtonUp" Name="lineSizeBtn" TextAlignment="Center" Text="5" VerticalAlignment="Center" Width="30" Height="20" ToolTip="线宽"></TextBlock>
+                    </Border>
+                    <ComboBox x:Name="lineSizeCb" SelectionChanged="lineSizeCb_SelectionChanged" Margin="-40,0,0,0" HorizontalAlignment="Left" Width="0">
+                        <TextBlock Width="32" Text="3" Margin="0,5,0,0" TextAlignment="Center" Height="24"></TextBlock>
+                        <TextBlock Width="32" Text="5" Margin="0,5,0,0" TextAlignment="Center" Height="24"></TextBlock>
+                        <TextBlock Width="32" Text="7" Margin="0,5,0,0" TextAlignment="Center" Height="24"></TextBlock>
+                        <TextBlock Width="32" Text="9" Margin="0,5,0,0" TextAlignment="Center" Height="24"></TextBlock>
+                        <TextBlock Width="32" Text="11" Margin="0,5,0,0" TextAlignment="Center" Height="24"></TextBlock>
+                    </ComboBox>
+                    <Grid Cursor="Hand" x:Name="cropBtn" ToolTip="剪裁" Margin="8,0,0,1" Width="24" Height="18" MouseLeftButtonDown="cropBtn_MouseLeftButtonDown">
+                        <Grid Background="Transparent"></Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/ImageEditIcon15.png" Stretch="Uniform"/>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid x:Name="studentGd">
+                        <WrapPanel>
+                            <Grid Cursor="Hand" x:Name="student1Btn" ToolTip="学生1" Margin="8,0,0,1" Width="24" Height="24" MouseLeftButtonDown="student1Btn_MouseLeftButtonDown">
+                                <Grid Background="Transparent">
+                                    <TextBlock Text="1" FontSize="10" FontFamily="Arial Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                </Grid>
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/ImageEditIcon17.png" Stretch="Uniform"/>
+                                </Grid.Background>
+                            </Grid>
+                            <Grid Cursor="Hand" x:Name="student2Btn" ToolTip="学生2" Margin="8,0,0,1" Width="24" Height="24" MouseLeftButtonDown="student2Btn_MouseLeftButtonDown">
+                                <Grid Background="Transparent">
+                                    <TextBlock Text="2" FontSize="10" FontFamily="Arial Black" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                </Grid>
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/ImageEditIcon17.png" Stretch="Uniform"/>
+                                </Grid.Background>
+                            </Grid>
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Cursor="Hand" x:Name="clearBtn" ToolTip="重置" Margin="5,0,0,0" Width="24" Height="19" MouseLeftButtonDown="clearBtn_MouseLeftButtonDown">
+                        <Grid Background="Transparent"></Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/ImageEditIcon7.png" Stretch="Uniform"/>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid Cursor="Hand" x:Name="closeBtn" ToolTip="关闭" Margin="5,0,0,0" Width="24" Height="16" MouseLeftButtonDown="closeBtn_MouseLeftButtonUp">
+                        <Grid Background="Transparent"></Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/ImageEditIcon8.png" Stretch="Uniform"/>
+                        </Grid.Background> 
+                    </Grid>
+                </WrapPanel>
+                <WrapPanel>
+                    
+                </WrapPanel>
+            </Grid>
+        </Border>
+        <Border x:Name="cropRect" Visibility="Collapsed" MouseLeftButtonDown="cropRect_MouseLeftButtonDown" MouseMove="cropRect_MouseMove" MouseLeftButtonUp="cropRect_MouseLeftButtonUp" BorderThickness="1" BorderBrush="#6495ED" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid>
+                <Rectangle x:Name="leftHandleRect" MouseLeftButtonDown="handleRect_MouseLeftButtonDown" MouseMove="handleRect_MouseMove" MouseLeftButtonUp="handleRect_MouseLeftButtonUp" Margin="-3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#6495ED" Width="5" Height="5" Cursor="SizeWE"/>
+                <Rectangle x:Name="topHandleRect" MouseLeftButtonDown="handleRect_MouseLeftButtonDown" MouseMove="handleRect_MouseMove" MouseLeftButtonUp="handleRect_MouseLeftButtonUp"  Margin="0,-3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="#6495ED" Width="5" Height="5" Cursor="SizeNS"/>
+                <Rectangle x:Name="rightHandleRect" MouseLeftButtonDown="handleRect_MouseLeftButtonDown" MouseMove="handleRect_MouseMove" MouseLeftButtonUp="handleRect_MouseLeftButtonUp"  Margin="0,0,-3,0" HorizontalAlignment="Right" VerticalAlignment="Center" Fill="#6495ED" Width="5" Height="5" Cursor="SizeWE"/>
+                <Rectangle x:Name="bottomHandleRect" MouseLeftButtonDown="handleRect_MouseLeftButtonDown" MouseMove="handleRect_MouseMove" MouseLeftButtonUp="handleRect_MouseLeftButtonUp"  Margin="0,0,0,-3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Fill="#6495ED" Width="5" Height="5" Cursor="SizeNS"/>
+                <Border x:Name="cropBar" Visibility="Collapsed" BorderBrush="#C8C8C8" Margin="0,0,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="1,1,1,1" Width="80" Height="40" Background="#F2F2F2">
+                    <WrapPanel x:Name="cropWp" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Cursor="Hand" x:Name="okBtn" Margin="5,0,0,0" Width="24" Height="19" MouseLeftButtonDown="okBtn_MouseLeftButtonDown">
+                            <Grid Background="Transparent"></Grid>
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/ImageEditIcon16.png" Stretch="Uniform"/>
+                            </Grid.Background>
+                        </Grid>
+                        <Grid Cursor="Hand" x:Name="cancelBtn" Margin="5,0,0,0" Width="24" Height="16" MouseLeftButtonDown="cancelBtn_MouseLeftButtonDown">
+                            <Grid Background="Transparent"></Grid>
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/ImageEditIcon8.png" Stretch="Uniform"/>
+                            </Grid.Background>
+                        </Grid>
+                    </WrapPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

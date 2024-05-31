@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.FullScreenControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="Black">
+        <!--<local:RtmpPlayerControl_WPF x:Name="rtmpPlayer" Visibility="Collapsed" MouseLeftButtonDown="fullScreenGd_MouseLeftButtonDown"/>-->
+        <local:ImageRenderGrid x:Name="imageRenderGrid" Visibility="Collapsed" MouseLeftButtonDown="fullScreenGd_MouseLeftButtonDown"/>
+        <Grid x:Name="loadingGd" Background="Black">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="White" Text="加载中..."/>
+        </Grid>
+        <Viewbox Stretch="Uniform" VerticalAlignment="Top" x:Name="view">
+            <Canvas Background="{Binding studentInfo.FullPreviewImageSource,IsAsync=True,Mode=OneWay}" Width="1920" Height="1080"/>
+        </Viewbox>
+        <Grid Name="fullScreenGd" Grid.RowSpan="3" Grid.ColumnSpan="4"> 
+            <Grid x:Name="controlBar">
+                <Border Margin="0,0,0,0" UseLayoutRounding="True" BorderThickness="1,0,1,1" BorderBrush="#FF171717" Width="290" Height="45" VerticalAlignment="Top" CornerRadius="0,0,10,10">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/LeftMenuBack.png">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Border.Background>
+                    <WrapPanel HorizontalAlignment="Center"  Margin="0,0" Height="45" VerticalAlignment="Center" >
+                        <Rectangle Width="1" Height="45"></Rectangle>
+                        <TextBlock Name="_tipLb2" Text="{Binding Path=Text,ElementName=_tipLb}" Foreground="White" HorizontalAlignment="Left" FontFamily="微软雅黑" FontSize="12pt" VerticalAlignment="Center" TextWrapping="Wrap" Width="190" Margin="10,0,0,0" />
+                        <Image x:Name="writeScreenBtn" Margin="7,0,7,0" VerticalAlignment="Center" Cursor="Hand" ToolTip="点评" Source="/CalligraphyAssistantMain;component/Images/Icon17.png" Width="26" Height="26" MouseLeftButtonDown="writeScreenBtn_MouseLeftButtonDown"></Image>
+                        <Image x:Name="exitFullScreenBtn" VerticalAlignment="Center" Cursor="Hand" ToolTip="退出全屏" Source="/CalligraphyAssistantMain;component/Images/Icon18.png" Width="28" Height="28" MouseLeftButtonDown="exitFullScreenBtn_MouseLeftButtonDown"></Image>
+                    </WrapPanel>
+                </Border>
+                <Border x:Name="previousBtn" MouseLeftButtonDown="previousBtn_MouseLeftButtonDown" Cursor="Hand" Width="45" Height="70" HorizontalAlignment="Left" CornerRadius="0,10,10,0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/LeftMenuBack.png"/>
+                    </Border.Background>
+                    <Image Width="32" HorizontalAlignment="Left" Margin="3,0,0,0" Source="/CalligraphyAssistantMain;component/Images/PreviousImage.png"/>
+                </Border>
+                <Border x:Name="nextBtn" MouseLeftButtonDown="nextBtn_MouseLeftButtonDown" Cursor="Hand" Width="45" Height="70"  HorizontalAlignment="Right" CornerRadius="10,0,0,10">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/LeftMenuBack.png">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="180" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Border.Background>
+                    <Image Width="32" HorizontalAlignment="Left" Margin="7,0,0,0" Source="/CalligraphyAssistantMain;component/Images/NextImage.png"/>
+                </Border>
+            </Grid>
+        </Grid>
+        <local:WriteScreenControl x:Name="writeScreenControl" Visibility="Collapsed" Back="writeScreenControl_Back" />
+    </Grid>
+</UserControl>

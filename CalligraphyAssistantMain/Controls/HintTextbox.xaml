@@ -1,0 +1,37 @@
+﻿<TextBox x:Class="CalligraphyAssistantMain.Controls.HintTextbox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" x:Name="textBox"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <TextBox.Resources>
+        <VisualBrush x:Key="HelpBrush" TileMode="None" Opacity="0.5" Stretch="None" AlignmentY="Center"  AlignmentX="Left" ViewportUnits="RelativeToBoundingBox">
+            <VisualBrush.Viewport>
+                <Rect X="0.01" Y="0" Width="1" Height="1" ></Rect>
+            </VisualBrush.Viewport>
+            <VisualBrush.Visual>
+                <Grid Background="Transparent" Height="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontFamily="微软雅黑" Foreground="#555" Text="{Binding Hint, ElementName=textBox}"/>
+                </Grid> 
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </TextBox.Resources>
+    <TextBox.Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{Binding ElementName=textBox, Path=Background}"></Setter>
+            <Style.Triggers>
+                <Trigger Property="Text" Value="{x:Null}">
+                    <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                </Trigger>
+                <Trigger Property="Text" Value="">
+                    <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </TextBox.Style>
+</TextBox> 

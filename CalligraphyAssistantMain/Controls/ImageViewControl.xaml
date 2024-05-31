@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.ImageViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls"
+             mc:Ignorable="d" 
+            d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid Background="Transparent">
+        <Border Width="1600" Height="900" Background="White" BorderThickness="3" BorderBrush="Black">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.3" ShadowDepth="8"/>
+            </Border.Effect>
+        </Border>
+        <Grid Width="1600" Height="900">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+             
+            </Grid>
+            <Grid Grid.Row="1">
+                <Image x:Name="image" Stretch="Uniform"/>
+                <Border Margin="40,0,0,0" x:Name="previousBtn2" Visibility="Collapsed" MouseLeftButtonDown="previousBtn_MouseLeftButtonDown" Cursor="Hand" Width="45" Height="70" HorizontalAlignment="Left" CornerRadius="10,0,0,10">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/LeftMenuBack.png"/>
+                    </Border.Background>
+                    <Image Width="32" HorizontalAlignment="Left" Margin="3,0,0,0" Source="/CalligraphyAssistantMain;component/Images/PreviousImage.png"/>
+                </Border>
+                <Border Margin="0,0,40,0" x:Name="nextBtn2"  Visibility="Collapsed"  MouseLeftButtonDown="nextBtn_MouseLeftButtonDown" Cursor="Hand" Width="45" Height="70"  HorizontalAlignment="Right" CornerRadius="0,10,10,0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/CalligraphyAssistantMain;component/Images/LeftMenuBack.png">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="180" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Border.Background>
+                    <Image Width="32" HorizontalAlignment="Left" Margin="7,0,0,0" Source="/CalligraphyAssistantMain;component/Images/NextImage.png"/>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid Width="140" Height="62" Margin="0,0,38,25" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Image Cursor="Hand" x:Name="cancelBtn" Source="/CalligraphyAssistantMain;component/Images/DefaultButton.png" MouseLeftButtonDown="cancelBtn_MouseLeftButtonUp"/>
+                    <TextBlock Cursor="Hand" Text="返回" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" MouseLeftButtonDown="cancelBtn_MouseLeftButtonUp"></TextBlock>
+                </Grid>
+                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image Visibility="Collapsed" Cursor="Hand" x:Name="previousBtn" MouseLeftButtonDown="previousBtn_MouseLeftButtonDown" VerticalAlignment="Center" Width="26" Height="26" Source="/CalligraphyAssistantMain;component/Images/Previous.png"></Image>
+                    <TextBlock x:Name="pageLb"   Visibility="Collapsed" VerticalAlignment="Center" Margin="15,0" Text="1/1" FontSize="16" HorizontalAlignment="Center" Foreground="Black"/>
+                    <Image Visibility="Collapsed" Cursor="Hand" x:Name="nextBtn" MouseLeftButtonDown="nextBtn_MouseLeftButtonDown" Width="26" Height="26" Source="/CalligraphyAssistantMain;component/Images/Previous.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </WrapPanel>
+                <TextBlock x:Name="studentInfoLb" Text="" Margin="70,0,0,0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="3"> 
+            </Grid>
+            <Image Margin="5" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png"/>
+            <Image Margin="5" Width="40" Height="40"  HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image Margin="5" Width="40" Height="40"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="2" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image Margin="5" Width="40" Height="40"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2" Source="/CalligraphyAssistantMain;component/Images/LeftTopBorder.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Grid> 
+    </Grid>
+</UserControl>

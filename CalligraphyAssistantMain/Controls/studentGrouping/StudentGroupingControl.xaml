@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.studentGrouping.StudentGroupingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls.studentGrouping"
+                         xmlns:code="clr-namespace:CalligraphyAssistantMain.Code"
+             xmlns:controls="clr-namespace:CalligraphyAssistantMain.Controls"
+             mc:Ignorable="d"  
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="黑体"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <code:IsNullConverter x:Key="isNullConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/CalligraphyAssistantMain;component/Style\Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/CalligraphyAssistantMain;component/Images/Back.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0 0">
+            <Border Background="#A08466" Width="870px" Height="50px" CornerRadius="0 0 45 45"></Border>
+            <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="讲台" FontSize="24" FontWeight="Bold" Foreground="#FFFFFF"></TextBlock>
+        </Grid>
+        <Border Grid.Row="1"  CornerRadius="4" Width="1490" Margin="0 30 0 0" VerticalAlignment="Top">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding CameraItemInfos}" Margin="50 0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="421px" Height="442px" Margin="20 0 20 20" BorderBrush="#000000" BorderThickness="1">
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="0.2" ShadowDepth="8"/>
+                            </Border.Effect>
+                           
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid  Background="#ffffff" Grid.RowSpan="2" Opacity="0.5"></Grid>
+                                <Border x:Name="groupBtn" BorderBrush="#000000" BorderThickness="2" Width="155" HorizontalAlignment="Left" Margin="15 10" CornerRadius="5" Tag="{Binding}" PreviewMouseLeftButtonDown="groupBtn_PreviewMouseLeftButtonDown"> 
+                                    <Grid Margin="3" Background="#F1DA9E">
+                                        <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="{ Binding Name}" FontSize="24" FontWeight="Bold" Foreground="#000000"></TextBlock>
+                                    </Grid>
+                                </Border>
+                                <ItemsControl Grid.Row="1" ItemsSource="{Binding StudentList}" Margin="24 0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"  />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border x:Name="studentBtn" BorderBrush="#000000" BorderThickness="2" Width="155" HorizontalAlignment="Left" Margin="15 10" CornerRadius="5" Tag="{Binding}" PreviewMouseLeftButtonDown="studentBtn_PreviewMouseLeftButtonDown">
+                                                <Grid Margin="3" Background="#F1DA9E">
+                                                    <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="{ Binding Name}" FontSize="24" FontWeight="Bold" Foreground="#000000"></TextBlock>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </Border>
+                        
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+        <controls:RightToolBarControl Grid.Row="1" Width="94" VerticalAlignment="Center" HorizontalAlignment="Right"></controls:RightToolBarControl>
+        <Border x:Name="returnBtn" Grid.Row="2" CornerRadius="8" HorizontalAlignment="Center" Width="228" Height="70"  PreviewMouseLeftButtonDown="ReturnBtn_PreviewMouseLeftButtonDown">
+            <Image Source="pack://application:,,,/CalligraphyAssistantMain;component/Images/Button2_2.png"/>
+        </Border>
+    </Grid>
+</UserControl>

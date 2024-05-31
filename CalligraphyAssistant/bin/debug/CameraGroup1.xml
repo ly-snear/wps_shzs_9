@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<CameraGroupInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Title>教师三目摄像头</Title>
+  <CameraGroupItemList>
+    <CameraGroupItemInfo>
+      <Title>画面1</Title>
+      <PreviewUrl>rtsp://admin:wd123456@192.168.110.123:554/Streaming/Channels/1</PreviewUrl>
+      <Url>rtsp://admin:wd123456@192.168.110.123:554</Url>
+    </CameraGroupItemInfo>
+    <CameraGroupItemInfo>
+      <Title>画面2</Title>
+      <PreviewUrl>rtsp://admin:wd123456@192.168.110.124:554/Streaming/Channels/2</PreviewUrl>
+      <Url>rtsp://admin:wd123456@192.168.110.124:554</Url>
+    </CameraGroupItemInfo>
+    <CameraGroupItemInfo>
+      <Title>画面3</Title>
+      <PreviewUrl>rtsp://admin:wd123456@192.168.110.124:554/Streaming/Channels/2</PreviewUrl>
+      <Url>rtsp://admin:wd123456@192.168.110.124:554</Url>
+    </CameraGroupItemInfo>
+  </CameraGroupItemList>
+</CameraGroupInfo>

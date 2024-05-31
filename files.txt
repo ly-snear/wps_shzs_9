@@ -1,0 +1,17 @@
+   --SendImagesControl:字帖分享页
+   --CalligraphyListControl:虎妞资源
+   --ImageItemControl5:虎妞资源选择
+   ----MainWindow:定义所有控件，都处于隐藏状态，根据逻辑驱动显示。包括左侧侧栏菜单。EventNotify事件注册。
+   ----MainControl:定义主界面右上角菜单（打开资源文件夹等），主菜单（分享桌面等）。
+   ----RightToolBarControl:定义右侧侧栏菜单
+   ----MQCenter:消息驱动中心
+   ----WorksControl:作品主界面
+   ----ImageItemControl5:图片加载控件
+   ----CalligraphyListControl:字帖选择控件
+   ----SendImagesControl:图片选择控件
+   ----AddVoteControl:增加投票
+   ----AddVoteControl:学生选择控件,分组选择等
+   ----Common:通用方法、配置参数等
+   --BeginClassControl:开始上课
+   --LoginWindow:登录窗口
+   --WelcomeControl:九宫格

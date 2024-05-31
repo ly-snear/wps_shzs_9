@@ -1,0 +1,233 @@
+﻿<UserControl x:Class="CalligraphyAssistantMain.Controls.SendCopyBookControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CalligraphyAssistantMain.Controls" 
+             xmlns:code="clr-namespace:CalligraphyAssistantMain.Code"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="黑体"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="CheckBox" x:Key="CheckBoxStyle">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#555555"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Margin" Value="0,0,14,0"/>
+                <Setter Property="Height" Value="34"/>
+                <Setter Property="Width" Value="100"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Border x:Name="checkBoxBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="2"
+                                BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                                <Grid>
+                                    <Border x:Name="Border" BorderThickness="0" CornerRadius="2"/>
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}" 
+                                              RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                        <Condition Property="IsChecked" Value="False" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#8000"/>
+                                </MultiTrigger>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="Effect" TargetName="Border">
+                                        <Setter.Value>
+                                            <DropShadowEffect ShadowDepth="2" Direction="280"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#1890FF"/>
+                                    <Setter Property="IsEnabled" TargetName="Border" Value="False"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <code:IsNullConverter x:Key="isNullConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#FFCF4A">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="68"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- 标题栏 -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="64"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="将要发送的字帖" Grid.Column="0" FontSize="32" Foreground="#3c3c3c" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <Border Grid.Column="1">
+                <Label FontFamily="/CalligraphyAssistantMain;component/Resources/#iconfont" Content="&#xe62a;" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonDown="Label_MouseLeftButtonDown">
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Setter Property="Foreground" Value="Red"></Setter>
+                            <Setter Property="FontSize" Value="32"></Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="Green"></Setter>
+                                    <Setter Property="FontSize" Value="28"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+            </Border>
+        </Grid>
+        <!-- 选择列表 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.Row="0" CornerRadius="8" Height="48" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="#34C58B">
+                <TextBlock Text="选择学生" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+            </Border>
+            <Border Grid.Column="1" Grid.Row="0" CornerRadius="8" Height="48" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="#34C58B">
+                <TextBlock Text="选择字帖" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF"/>
+            </Border>
+            <!-- 学生列表 -->
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <ItemsControl x:Name="stuList" Grid.Row="1" ItemsSource="{Binding CameraItemInfos}" Margin="50 0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0" >
+                                <Grid  Height="34"  VerticalAlignment="Top" Margin="0 10">
+                                    <CheckBox x:Name="groupCheckBox" Content="{Binding Name}" IsChecked="{Binding IsSelected}" VerticalContentAlignment="Center" Tag="{Binding}" Foreground="#000000" FontSize="14" />
+                                </Grid>
+                                <ItemsControl Grid.Row="1" ItemsSource="{Binding StudentList}" Margin="24 0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"  />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Style="{DynamicResource CheckBoxStyle}" IsChecked="{Binding IsSelected}" Content="{Binding Name}" Margin="0 10 15 10"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="50 0">
+                    <RadioButton x:Name="selectAllBtn" Content="全选" Style="{StaticResource RadioButtonStyle}" IsChecked="True" BorderBrush="#1890FF" Margin="0 0 20 0" FontSize="14" Checked="selectAllBtn_Checked" />
+                    <RadioButton x:Name="invertBtn" Content="反选" Style="{StaticResource RadioButtonStyle}" Margin="20 0" FontSize="14" Checked="invertBtn_Checked"/>
+                    <RadioButton x:Name="uncheckBtn" Content="不选" Style="{StaticResource RadioButtonStyle}" Margin="20 0" FontSize="14" Checked="uncheckBtn_Checked"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100 0" Orientation="Horizontal">
+                    <TextBlock Text="已选择 " FontSize="16"/>
+                    <TextBlock x:Name="selectCount" Text="0" FontSize="16" Foreground="#34C58B"/>
+                    <TextBlock Text=" 人" FontSize="16"/>
+                </StackPanel>
+            </Grid>
+            <!-- 字帖列表 -->
+            <ItemsControl x:Name="copybook" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding shareCopyBooks}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"  />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:ItemCopyBook></local:ItemCopyBook>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <!-- 上传进度 -->
+        <Grid x:Name="pb" Grid.Row="2" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ProgressBar x:Name="pbFiles" Grid.Column="0" Value="{Binding Value}" Minimum="{Binding Min}" Maximum="{Binding Total}" Margin="10 0 5 0"></ProgressBar>
+            <ProgressBar x:Name="pbFile" Grid.Column="1" Value="{Binding Value}" Minimum="{Binding Min}" Maximum="{Binding Total}" Margin="5 0 10 0"></ProgressBar>
+        </Grid>
+        <!-- 操作栏 -->
+        <Grid Grid.Row="3" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="320"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <!-- 本地选择 -->
+                <Border  Background="Green" Margin="10" CornerRadius="10" Cursor="Hand">
+                    <StackPanel x:Name="selectFile" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0" MouseLeftButtonDown="selectFile_MouseLeftButtonDown">
+                        <Label FontFamily="/CalligraphyAssistantMain;component/Resources/#iconfont" Content="&#xe65a;" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <TextBlock Margin="5 0 0 0" FontSize="24" Background="Transparent" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">选择文件</TextBlock>
+                    </StackPanel>
+                </Border>
+                <!-- 虎妞碑帖 -->
+                <Border Background="Green" Margin="10" CornerRadius="10" Cursor="Hand">
+                    <StackPanel x:Name="tiger" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0" MouseLeftButtonDown="tiger_MouseLeftButtonDown">
+                        <Label FontFamily="/CalligraphyAssistantMain;component/Resources/#iconfont" Content="&#xe61b;" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <TextBlock Margin="5 0 0 0" FontSize="24" Background="Transparent" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">虎妞碑帖</TextBlock>
+                    </StackPanel>
+                </Border>
+                <!-- 虎妞单字 -->
+                <Border  Background="Green" Margin="10" CornerRadius="10" Cursor="Hand">
+                    <StackPanel x:Name="tigerWord" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0" MouseLeftButtonDown="tigerWord_MouseLeftButtonDown">
+                        <Label FontFamily="/CalligraphyAssistantMain;component/Resources/#iconfont" Content="&#xe638;" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <TextBlock Margin="5 0 0 0" FontSize="24" Background="Transparent" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">虎妞单字</TextBlock>
+                    </StackPanel>
+                </Border>
+                <!-- 备课文件 -->
+                <Border  Background="Green" Margin="10" CornerRadius="10" Cursor="Hand">
+                    <StackPanel x:Name="prepareLesson" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0" MouseLeftButtonDown="prepareLesson_MouseLeftButtonDown">
+                        <Label FontFamily="/CalligraphyAssistantMain;component/Resources/#iconfont" Content="&#xea00;" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <TextBlock Margin="5 0 0 0" FontSize="24" Background="Transparent" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">备课文件</TextBlock>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <!-- 发送 -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0">
+                <Border  Background="Red" Margin="10" CornerRadius="10" Cursor="Hand">
+                    <StackPanel x:Name="deleteCopybooks" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0" MouseLeftButtonDown="deleteCopybooks_MouseLeftButtonDown">
+                        <Label FontFamily="/CalligraphyAssistantMain;component/Resources/#iconfont" Content="&#xeb6a;" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <TextBlock Margin="5 0 0 0" FontSize="24" Background="Transparent" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">删除碑帖</TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border Background="Green" Margin="10" CornerRadius="10" Cursor="Hand">
+                    <StackPanel x:Name="sendCopybooks" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0" MouseLeftButtonDown="sendCopybooks_MouseLeftButtonDown">
+                        <Label FontFamily="/CalligraphyAssistantMain;component/Resources/#iconfont" Content="&#xe603;" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <TextBlock Margin="5 0 0 0" FontSize="24" Background="Transparent" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">发送</TextBlock>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

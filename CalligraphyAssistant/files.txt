@@ -1,0 +1,218 @@
+   --SendImagesControl:字帖分享页
+   --CalligraphyListControl:虎妞资源
+   --ImageItemControl5:虎妞资源选择
+   ----MainWindow:定义所有控件，都处于隐藏状态，根据逻辑驱动显示。包括左侧侧栏菜单。EventNotify事件注册。
+   ----MainControl:定义主界面右上角菜单（打开资源文件夹等），主菜单（分享桌面等）。
+   ----RightToolBarControl:定义右侧侧栏菜单
+   ----MQCenter:消息驱动中心
+   ----WorksControl:作品主界面
+   ----ImageItemControl5:图片加载控件
+   ----CalligraphyListControl:字帖选择控件
+   ----SendImagesControl:图片选择控件
+   ----AddVoteControl:增加投票
+   ----AddVoteControl:学生选择控件,分组选择等
+   ----Common:通用方法、配置参数等
+   --BeginClassControl:开始上课
+   --LoginWindow:登录窗口
+   --WelcomeControl:九宫格
+   --ClassRoomSeatControl:接收学生发送的任务完成消息
+   --QuickAnswerlistControl:快速问答
+   --AddQuickAnswerControl:新增快速问题
+   ----MainWindow :: addQuickAnswerControl_SelectUserClick 新增快速问题后 下发
+   ----MainWindow :: quickAnswerlistControl_StatisticsClick 快速问题答题完成后显示答题状态
+   ----MainWindow :: addQuickAnswerControl_QuickResponseClick 新增快速问题后 抢答 
+   ----MainWindow :: addQuickAnswerControl_RandomlySelectClick 新增快读问题后 随机抽人
+   --StatisticControl:快速问题统计
+   --xmlns:works="clr-namespace:CalligraphyAssistantMain.Controls.works"
+   --WorksControl:学生、教师作品列表页
+   --StudentWorksControl:学生作品控件
+   --TeacherWorksControl:教师作品控件
+   --StudentWorkItemControl:学生作品条目控件
+   --WorkShareList:作品互拼页面	
+   --PublishAnswerControl:快速问题发布答案
+
+                    选择学生的代码片段
+                    SelectStudentsControl selectStudentsControl = new SelectStudentsControl();
+                    selectStudentsControl.BindStudentList(Common.CameraList);
+                    if (selectStudentsControl.ShowDialog() == true)
+                    {
+                        List<StudentInfo> students = new List<StudentInfo>();
+                        selectStudentsControl.CameraItemInfos.ForEach(p => p.StudentList.ForEach(s =>
+                        {
+                            if (s.IsSelected)
+                            {
+                                students.Add(s);
+                            }
+                        }));
+
+                        if (students.Count > 0)
+                        {
+                            //通知选中的学生
+                            students.ForEach(s => MQCenter.Instance.Send(s, MessageType.StartQuickAnswer, new
+                            {
+                                info.id,
+                                answer_type = info.type == "quick" ? 0 : 1,
+                                type = 2,
+                                info.title,
+                                info.question,
+                                info.content
+                            }));
+                            //倒计时结束
+                            EventNotify.OnCountdownTrigger(info.id, () =>
+                            {
+                                info.status = "2";
+                                MQCenter.Instance.SendToAll(MessageType.StopQuickAnswer, new
+                                {
+                                    info.id,
+                                    answer_type = info.type == "quick" ? 0 : 1,
+                                    info.title,
+                                    info.question,
+                                    info.content
+                                });
+                            });
+                            info.status = "1";
+                            quickAnswerlistControl_StatisticsClick(info, e);
+                        }
+                    }
+
+   --快速答题开始消息：4，同修改前没有变化
+   ----数据
+   ------answer_type: 题类型 0=选择题  1=主观题 
+   ------type: 答题类型 0=抢答 1=随机抽人 2=选择学生
+			{
+				"classId": 80,
+				"lessonId": 1049,
+				"classRoomId": 19,
+				"sendUserId": 75,
+				"type": 4,
+				"userType": 0,
+				"data": {
+					"id": 276,
+					"answer_type": 0,
+					"type": 2,
+					"title": "快速问题选择题-->276",
+					"question": 4,
+					"content": ""
+				}
+			} 
+			
+
+   --快速答题停止消息：5，同修改前没有变化
+   ----数据
+		{
+			"classId": 80,
+			"lessonId": 1049,
+			"classRoomId": 19,
+			"sendUserId": 75,
+			"type": 5,
+			"userType": 0,
+			"data": {
+				"id": 276,
+				"answer_type": 0,
+				"title": "快速问题选择题-->276",
+				"question": 4,
+				"content": ""
+			}
+		} 
+		
+   --快速答题发布答案消息：6，同修改前没有变化
+   ----数据
+   ------answer: 答案序号 1=A 2=B 3=C 4=D 5=E
+		{
+			"classId": 80,
+			"lessonId": 1049,
+			"classRoomId": 19,
+			"sendUserId": 75,
+			"type": 6,
+			"userType": 0,
+			"data": {
+				"id": 276,
+				"answer_type": 0,
+				"title": "快速问题选择题-->276",
+				"answer": 2
+			}
+		}
+
+   --快速答题学生提交答案消息：35
+   ----数据
+   ------answer: 提交答案，选择题：A到E；主观题：主观题答案
+   ------audio: 主观题语音答案地址，选择题可以不提交
+   ------start: 开始答题时间戳，精确到毫秒
+   ------elapsed: 答题时长，计量单位：秒
+   ------type: 题类型 0=选择题  1=主观题 
+   ------style: 答题类型 0=抢答 1=随机抽人 2=选择学生
+		{
+			"classId": 80,
+			"lessonId": 1027,
+			"classRoomId": 19,
+			"sendUserId": 2854,
+			"type": 35,
+			"userType": 1,
+			"data": {
+				"answer": "我的问题",
+				"audio": "https://video.nnyun.net/wav/OSR_cn_000_0075_8k.wav",
+				"start": 1643825046,
+				"elapsed": 34,
+				"type": 1,
+				"style": 2,
+				"id": 398,
+				"student": 2854,
+				"name": "张三"
+			}
+		}
+		
+   --快速答题抢答完成消息：36，仅抢答成功的学生
+   ----数据
+   ------answer: 提交答案，选择题：A到E；主观题：主观题答案
+   ------audio: 主观题语音答案地址，选择题可以不提交
+   ------start: 开始答题时间戳，精确到毫秒
+   ------elapsed: 答题时长，计量单位：秒
+   ------type: 题类型 0=选择题  1=主观题 
+   ------style: 答题类型 0=抢答 1=随机抽人 2=选择学生
+		{
+			"classId": 80,
+			"lessonId": 1027,
+			"classRoomId": 19,
+			"sendUserId": 2854,
+			"type": 36,
+			"userType": 1,
+			"data": {
+				"answer": "我的问题",
+				"audio": "https://video.nnyun.net/wav/OSR_cn_000_0075_8k.wav",
+				"start": 1643825046,
+				"elapsed": 34,
+				"type": 1,
+				"style": 2,
+				"id": 398,
+				"student": 2854,
+				"name": "张三"
+			}
+		}
+
+   --快速答题抢答完成消息：37，除开抢答成功的学生
+   ----数据
+   ------answer: 提交答案，选择题：A到E；主观题：主观题答案
+   ------audio: 主观题语音答案地址，选择题可以不提交
+   ------start: 开始答题时间戳，精确到毫秒
+   ------elapsed: 答题时长，计量单位：秒
+   ------type: 题类型 0=选择题  1=主观题 
+   ------style: 答题类型 0=抢答 1=随机抽人 2=选择学生
+		{
+			"classId": 80,
+			"lessonId": 1027,
+			"classRoomId": 19,
+			"sendUserId": 2854,
+			"type": 36,
+			"userType": 1,
+			"data": {
+				"answer": "我的问题",
+				"audio": "https://video.nnyun.net/wav/OSR_cn_000_0075_8k.wav",
+				"start": 1643825046,
+				"elapsed": 34,
+				"type": 1,
+				"style": 2,
+				"id": 398,
+				"student": 2854,
+				"name": "张三"
+			}
+		}

@@ -1,0 +1,199 @@
+﻿<Window xmlns:Controls="clr-namespace:CalligraphyAssistantMain.Controls"  x:Class="CalligraphyAssistantMain.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:works="clr-namespace:CalligraphyAssistantMain.Controls.works"
+        xmlns:studentGrouping="clr-namespace:CalligraphyAssistantMain.Controls.studentGrouping"
+        xmlns:local="clr-namespace:CalligraphyAssistantMain" 
+        xmlns:Code="clr-namespace:CalligraphyAssistantMain.Code"
+        mc:Ignorable="d"
+        Title="艺学宝主界面" Height="1080" Width="1920" Left="0" Top="0" WindowStartupLocation="Manual" ShowInTaskbar="True" ResizeMode="NoResize" WindowStyle="None" StateChanged="Window_StateChanged" Icon="Images/Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Code:MainWindowConverter x:Key="converter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="backGd" >
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Back.png"/>
+        </Grid.Background>
+        <Grid x:Name="mainGd"  MouseMove="mainGd_MouseMove"
+               MouseEnter="mainGd_MouseEnter" MouseLeave="mainGd_MouseLeave">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8.8*"/>
+                    <RowDefinition Height="1.2*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Controls:MainControl x:Name="mainControl" SoftwareClick="mainControl_SoftwareClick" CameraListClick="mainControl_CameraListClick"  PaperClick="MainControl_PaperClick" StudentInteractClick="MainControl_StudentInteractClick"
+                                          ShowResourceClick="MainControl_ShowResourceClick"
+                                          Visibility="{Binding SelectedMainMenu,Converter={StaticResource converter},ConverterParameter=Visibility_2}" />
+                </Grid>
+                <Grid Grid.Row="0" Grid.RowSpan="2">
+                    <Controls:CameraListControl x:Name="cameraListControl" SendImagesClick="cameraListControl_SendImagesClick" StudentWorksClick="cameraListControl_StudentWorksClick" FullScreenClick="cameraListControl_FullScreenClick" StudentListClick="cameraListControl_StudentListClick" Visibility="{Binding SelectedMainMenu,Converter={StaticResource converter},ConverterParameter=Visibility_1}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Image Visibility="Collapsed" Cursor="Hand" Tag="1" Height="70" Source="{Binding SelectedMainMenu,Converter={StaticResource converter},ConverterParameter=MenuButton_1}" MouseLeftButtonDown="Image_MouseLeftButtonUp">
+                                </Image>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Image Cursor="Hand" Tag="2" Height="70" Source="{Binding SelectedMainMenu,Converter={StaticResource converter},ConverterParameter=MenuButton_2}" MouseLeftButtonDown="Image_MouseLeftButtonUp">
+
+                                </Image>
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <Image Visibility="Collapsed" Cursor="Hand" Tag="3" Height="70" Source="Images/Button3.png" MouseLeftButtonDown="Image_MouseLeftButtonUp">
+                                </Image>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!-- 左侧侧栏工具条 -->
+            <Border x:Name="leftToolBar" CornerRadius="0,10,10,0" Width="94" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Border.Background>
+                    <ImageBrush ImageSource="Images/LeftMenuBack.png"/>
+                </Border.Background>
+                <StackPanel Margin="0,0,0,15">
+                    <Grid Height="100" Tag="屏写" ToolTip="屏写（快捷键 Ctrl+Alt+Q）" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon1.png" ></Image>
+                        <TextBlock Text="屏写" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid x:Name="taskBtn" Height="100" Tag="任务统计" ToolTip="任务统计" Cursor="Hand" MouseLeftButtonDown="TaskBtn_MouseLeftButtonDown">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon26.png" ></Image>
+                        <TextBlock Text="任务统计" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>                    
+                    <Grid x:Name="voteBtn" Height="100" Tag="投票" ToolTip="投票" Cursor="Hand" MouseLeftButtonDown="voteBtn_MouseLeftButtonDown">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon26.png" ></Image>
+                        <TextBlock Text="投票" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid x:Name="answerBtn" Height="100" Tag="快速答题" ToolTip="快速答题" Cursor="Hand" MouseLeftButtonDown="answerBtn_MouseLeftButtonDown">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon23.png" Stretch="Uniform"></Image>
+                        <TextBlock Text="快速答题" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid x:Name="exercisesBtn" Height="100" Tag="快速答题" ToolTip="快速答题" Cursor="Hand" MouseLeftButtonDown="exercisesBtn_MouseLeftButtonDown" Visibility="Collapsed">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon24.png" ></Image>
+                        <TextBlock Text="快速答题" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+
+                    <!--<Grid Height="100" Tag="更多" ToolTip="更多" Cursor="Hand" Visibility="{Binding SelectedMainMenu,Converter={StaticResource converter},ConverterParameter=ShowMoreMenu}" MouseLeftButtonDown="Grid_MouseLeftButtonUp">-->
+                    <Grid Height="100" Tag="更多" ToolTip="更多" Cursor="Hand" Visibility="Collapsed" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon2.png" ></Image>
+                        <TextBlock Text="更多" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid x:Name="classBeginBtn" Tag="上课" ToolTip="开始上课" Height="100" Cursor="Hand" Visibility="{Binding IsClassBegin,Converter={StaticResource converter},ConverterParameter=IsClassBegin_1}" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon15.png" >
+                        </Image>
+                        <TextBlock Text="上课" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid x:Name="classEndBtn" Tag="下课" ToolTip="结束上课" Height="100" Cursor="Hand" Visibility="{Binding IsClassBegin,Converter={StaticResource converter},ConverterParameter=IsClassBegin_2}" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon3.png" >
+                        </Image>
+                        <TextBlock Text="下课" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+
+                    <Grid Height="100" Cursor="Hand"  ToolTip="同步黑屏" MouseLeftButtonDown="sendBlackBtn_MouseLeftButtonUp">
+                        <Image  Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" x:Name="sendBlackBtn"  Source="/CalligraphyAssistantMain;component/Images/BlackScreen.png"></Image>
+                        <TextBlock x:Name="switchBlack" Text="黑屏" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid Height="100" Cursor="Hand"  ToolTip="同步白屏" MouseLeftButtonDown="sendWhiteBtn_MouseLeftButtonUp" >
+                        <Image  Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" x:Name="sendWhiteBtn"  Source="/CalligraphyAssistantMain;component/Images/WhiteScreen.png"></Image>
+                        <TextBlock x:Name="switchWhite" Text="白屏" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid Height="100" Tag="放大镜" ToolTip="放大镜" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/magnifier.png" ></Image>
+                        <TextBlock Text="放大镜" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                    <Grid Height="100" Tag="桌面" ToolTip="显示桌面" Cursor="Hand" MouseLeftButtonDown="Grid_MouseLeftButtonUp">
+                        <Image Width="40" Height="40" VerticalAlignment="Top" Margin="0,25,0,0" Source="Images/Icon5.png" ></Image>
+                        <TextBlock Text="桌面" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Controls:SendImagesControl x:Name="sendImagesControl" Visibility="Collapsed" Margin="0,-50,0,0" IsVisibleChanged="sendImagesControl_IsVisibleChanged" />
+            <Controls:ImageListControl x:Name="imageListControl" Visibility="Collapsed" Margin="0,-50,0,0" IsVisibleChanged="imageListControl_IsVisibleChanged"/>
+            <Controls:SoftwareControl x:Name="softwareControl" Visibility="Collapsed" Margin="0,-50,0,0" />
+            <Controls:BeginClassControl x:Name="beginClassControl" Visibility="Collapsed" Margin="0,-50,0,0" ClassBegined="beginClassControl_ClassBegined" />
+            <WindowsFormsHost x:Name="windowsFormsHost" Visibility="Collapsed" HorizontalAlignment="Right" Width="100"/>
+            <Controls:StudentListControl x:Name="studentListControl" Visibility="Collapsed" StudentClick="studentListControl_StudentClick" ResetStudentList="studentListControl_ResetStudentList" IsVisibleChanged="studentListControl_IsVisibleChanged"/>
+            <Controls:FullScreenControl x:Name="fullScreenControl" Visibility="Collapsed" />
+            <Controls:WriteScreenControl x:Name="writeScreenControl" Visibility="Collapsed" Back="writeScreenControl_Back" />
+            <studentGrouping:StudentGroupingControl x:Name="studentGroupingControl" Visibility="Collapsed"></studentGrouping:StudentGroupingControl>
+            <studentGrouping:StudentCameraGroupControl x:Name="studentCameraGroupControl" Visibility="Collapsed"/>
+            <studentGrouping:StudentCameraControl x:Name="studentCameraControl" Visibility="Collapsed"/>
+            <studentGrouping:CameraContrastControl x:Name="cameraContrastControl" Visibility="Collapsed"/>
+
+            <Controls:QuickAnswerlistControl x:Name="quickAnswerlistControl" Visibility="Collapsed" IsVisibleChanged="quickAnswerlistControl_IsVisibleChanged"
+                                             AddQuickAnswerClick="quickAnswerlistControl_AddQuickAnswerClick"
+                                             StatisticsClick="QuickAnswerlistControl_StatisticsClick"
+                                             BeganWritingClick="QuickAnswerlistControl_BeganWritingClick"/>
+
+            <Controls:AddQuickAnswerControl x:Name="addQuickAnswerControl"  Visibility="Collapsed" 
+                                            QuickResponseClick="addQuickAnswerControl_QuickResponseClick" 
+                                            RandomlySelectClick="addQuickAnswerControl_RandomlySelectClick"
+                                            SelectUserClick="addQuickAnswerControl_SelectUserClick"/>
+            <Controls:VoteListControl x:Name="voteListControl" Visibility="Collapsed" />
+            <Controls:PaperControl x:Name="paperControl" Visibility="Collapsed"/>
+            <Controls:ClassInteractionControl x:Name="classInteractionControl" Visibility="Collapsed"/>
+            <Controls:ResourceDirectoryControl x:Name="resourceDirectoryControl" Visibility="Collapsed" CheckDistributionClick="ResourceDirectoryControl_CheckDistributionClick"/>
+            <Controls:MaterialSendControl x:Name="materialSendControl" Visibility="Collapsed"/>
+            <Controls:MaterialCountControl x:Name="materialCountControl" Visibility="Collapsed"/>
+            <Controls:TaskCountControl x:Name="taskCountControl" Visibility="Collapsed"/>
+            <Controls:SendCopyBookControl x:Name="sendCopyBookControl" Visibility="Collapsed"/>
+            <Controls:SelectCopyBookFromPrepareLessonControl x:Name="copyBookPrepareLessonControl" Visibility="Collapsed"/>
+            <Controls:SelectCopyBookWordFromTigerControl x:Name="copyBookTigerWordControl" Visibility="Collapsed"/>
+            <Controls:SelectCopyBookFromTigerControl x:Name="copyBookTigerControl" Visibility="Collapsed"/>
+            <Controls:ClassRoomSeatControl x:Name="classRoomSeatControl" Visibility="Collapsed"/>
+            <Controls:QuickQuestionAnswersControl x:Name="quickQuestionAnswersControl" Visibility="Collapsed"></Controls:QuickQuestionAnswersControl>
+            <Controls:FileDistributionListControl x:Name="fileDistributionListControl" Visibility="Collapsed"/>
+            <works:WorksControl x:Name="worksControl" Visibility="Collapsed"/>
+            <works:WorkShareList x:Name="workShareList" Visibility="Collapsed"/>
+            <works:StudentWorkMutualCommentControl x:Name="studentWorkMutualComment" Visibility="Collapsed"/>
+            <works:WorkCommentListReviewControl x:Name="WorkCommentList" Visibility="Collapsed"/>
+            <works:WorkReviewControl x:Name="workReviewControl" Visibility="Collapsed"/>
+            <works:WorksContrastControl x:Name="worksContrastControl" Visibility="Collapsed"/>
+            <Controls:countdownControl x:Name="countdownView" Foreground="Red" Visibility="Collapsed" Panel.ZIndex="1000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6" Width="200"></Controls:countdownControl>
+            <Controls:DocmentViewControl x:Name="docmentViewControl" Visibility="Collapsed" IsVisibleChanged="DocmentViewControl_IsVisibleChanged"></Controls:DocmentViewControl>
+
+
+            <Controls:TipControl x:Name="tipControl" Visibility="Collapsed" Height="60" Width="500" VerticalAlignment="Top" />
+            <Grid x:Name="goBackGd" ToolTip="返回" Cursor="Hand" Width="80" Height="80" Margin="0,0,60,60" HorizontalAlignment="Right" VerticalAlignment="Bottom" MouseLeftButtonDown="goBackGd_MouseLeftButtonDown">
+                <Ellipse Fill="#4BAF4F">
+                    <Ellipse.Effect>
+                        <DropShadowEffect Opacity="0.5" ShadowDepth="4" BlurRadius="10"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+                <Image Margin="7" Source="Images/Icon20.png"/>
+            </Grid>
+            <Controls:WelcomeControl x:Name="welcomeControl" Visibility="Collapsed" ClassBegined="beginClassControl_ClassBegined" />
+        </Grid>
+        <Controls:StudentsAskQuestionControl Panel.ZIndex="200" x:Name="studentsAskQuestionControl" HorizontalAlignment="Right" VerticalAlignment="Bottom" MaxHeight="370" Margin="0 0 0 20"></Controls:StudentsAskQuestionControl>
+        <Viewbox Name="viewBox" Stretch="Fill" StretchDirection="Both" Visibility="Collapsed">
+        </Viewbox>
+        <Canvas IsHitTestVisible="False">
+            <Ellipse Stroke="LightBlue" Name="MagnifierCircle"  Visibility="Collapsed"
+            Height="200" Width="200">
+                <Ellipse.Fill>
+                    <VisualBrush x:Name="MagnifierBrush"  
+                        Visual="{Binding ElementName=mainGd}" 
+                        ViewboxUnits="Absolute"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Canvas>
+    </Grid>
+
+</Window>

@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalligraphyAssistantMain"
+        xmlns:Controls="clr-namespace:CalligraphyAssistantMain.Controls" x:Class="CalligraphyAssistantMain.TestWindow"
+        mc:Ignorable="d"
+        Title="TestWindow" Height="750" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+            <Controls:UDPPlayerControl Background="Black" x:Name="udpPlayer" Grid.Row="1" />
+            <Button Content="播放" HorizontalAlignment="Left" Margin="17,16,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+            <Button Content="停止" HorizontalAlignment="Left" Margin="111,16,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+            <Grid Grid.Row="2">
+                <WrapPanel VerticalAlignment="Center">
+                    <Controls:UDPPlayerControl Margin="5" Width="140" Height="120" x:Name="udpPlayer1" Click="udpPlayer1_Click"/>
+                    <Controls:UDPPlayerControl Margin="5" Width="140" Height="120" x:Name="udpPlayer2" Click="udpPlayer2_Click"/>
+                    <Controls:UDPPlayerControl Margin="5" Width="140" Height="120" x:Name="udpPlayer3" Click="udpPlayer3_Click"/>
+                </WrapPanel>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

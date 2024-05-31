@@ -1,0 +1,58 @@
+﻿<?xml version="1.0"?>
+<ArrayOfAppInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AppInfo>
+    <Type>1</Type>
+    <Title>计算器</Title>
+    <Path>C:\Windows\System32\calc.exe</Path>
+  </AppInfo>  
+  <AppInfo>
+    <Type>1</Type>
+    <Title>控制面板</Title>
+    <Path>C:\Windows\System32\control.exe</Path>
+  </AppInfo>
+  <AppInfo>
+    <Type>2</Type>
+    <Title>记事本</Title>
+    <Path>C:\Windows\System32\notepad.exe</Path>
+  </AppInfo>
+  <AppInfo>
+    <Type>3</Type>
+    <Title>Cmd</Title>
+    <Path>C:\Windows\System32\cmd.exe</Path>
+  </AppInfo> 
+  <AppInfo>
+    <Type>3</Type>
+    <Title>D盘</Title>
+    <Path>C:\Windows\explorer.exe</Path>
+    <Arguments>D:\</Arguments>
+  </AppInfo>
+  <AppInfo>
+    <Type>3</Type>
+    <Title>艺淀云</Title>
+    <Integrated>true</Integrated>
+    <Auth>1</Auth>
+    <Path>C:\Program Files (x86)\Internet Explorer\iexplore.exe</Path>
+    <Arguments>http://yidian.nnyun.net/</Arguments>
+  </AppInfo>
+  <AppInfo>
+    <Type>3</Type>
+    <Title>艺淀云资源</Title>
+    <Integrated>true</Integrated>
+    <Auth>1</Auth>
+    <Path>C:\Program Files (x86)\Internet Explorer\iexplore.exe</Path>
+    <Arguments>http://shuhua.nnyun.net/login</Arguments>
+  </AppInfo>
+  <AppInfo>
+    <Type>3</Type>
+    <Title>百度</Title> 
+    <Integrated>true</Integrated>
+    <Path>C:\Program Files (x86)\Internet Explorer\iexplore.exe</Path>
+    <Arguments>http://www.baidu.com/</Arguments>
+  </AppInfo>
+  <AppInfo>
+    <Type>3</Type>
+    <Title>百度(IE浏览器)</Title> 
+    <Path>C:\Program Files (x86)\Internet Explorer\iexplore.exe</Path>
+    <Arguments>http://www.baidu.com/</Arguments>
+  </AppInfo>
+</ArrayOfAppInfo>
